@@ -1,0 +1,74 @@
+:root{
+	--grayMain: #1d1d1d;
+	--grayLight: #404040;
+}
+
+html, body{
+	height: 100%;
+}
+
+body{
+	background-color:var(--grayMain);
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.flex{
+	display: flex;
+}
+
+.lightGray{
+	background-color:var(--grayLight);
+}
+
+.whiteText{
+	color: white;
+}
+
+#container{
+	color:white;
+	height: calc(100% - 13.5rem);
+	margin-top: 10em;
+}
+
+#conversionInput input{
+	background-color:var(--grayLight);
+	border: 2px solid white;
+	border-right: 0;
+	color: white;
+	font-size: 18pt;
+	padding: 0 .25em;
+	text-align: right;
+}
+
+#conversionInput input:last-child{
+	border-right: 2px solid white;
+}
+
+#conversionInput input:nth-child(2n){
+	flex-grow: 1;
+}
+
+#conversionInput input.correct{
+	color: green;
+}
+
+#conversionInput input.wrong{
+	color: red;
+}
+
+#formula{
+	height: 8em;
+}
+
+#nav .brand-logo{
+	margin-left: .5em;
+}
+
+#formula .card-reveal{
+	background-color: var(--grayLight);
+}
