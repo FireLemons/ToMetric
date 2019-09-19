@@ -8,9 +8,7 @@
     font-weight: 400;
     src: local('Material Icons'),
          local('MaterialIcons-Regular'),
-         url(iconfont/MaterialIcons-Regular.woff2) format('woff2'),
-         url(iconfont/MaterialIcons-Regular.woff) format('woff'),
-         url(iconfont/MaterialIcons-Regular.ttf) format('truetype');
+         url(iconfont/MaterialIcons-Regular.woff2) format('woff2');
 }
 
 body{
