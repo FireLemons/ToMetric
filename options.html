@@ -18,7 +18,7 @@
                 <div class="col s12">
                     <div id="general-options" class="card grey darken-3">
                         <div class="card-image">
-                            <img src="img/general.jpeg">
+                            <img src="img/general.jpeg" alt="general options background">
                             <span class="card-title">General</span>
                         </div>
                         <div class="card-content">
@@ -36,7 +36,7 @@
                 <div class="col s12">
                     <div id="distance-options" class="card grey darken-3">
                         <div class="card-image">
-                            <img src="img/distance.jpg">
+                            <img src="img/distance.jpg" alt="distance options background">
                             <span class="card-title">Distance</span>
                             <div class="switch">
                                 <label class="white-text">
@@ -57,7 +57,7 @@
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.distance.customary.inches">
+                                                    <input type="checkbox" v-model="options.conversions.distance.customary.inches" :disabled="!options.conversions.distance.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
@@ -68,7 +68,7 @@
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.distance.customary.feet">
+                                                    <input type="checkbox" v-model="options.conversions.distance.customary.feet" :disabled="!options.conversions.distance.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
@@ -79,7 +79,7 @@
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.distance.customary.yards">
+                                                    <input type="checkbox" v-model="options.conversions.distance.customary.yards" :disabled="!options.conversions.distance.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
@@ -90,7 +90,7 @@
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.distance.customary.miles">
+                                                    <input type="checkbox" v-model="options.conversions.distance.customary.miles" :disabled="!options.conversions.distance.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
@@ -104,7 +104,7 @@
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.distance.metric.millimeters">
+                                                    <input type="checkbox" v-model="options.conversions.distance.metric.millimeters" :disabled="!options.conversions.distance.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
@@ -115,7 +115,7 @@
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.distance.metric.centimeters">
+                                                    <input type="checkbox" v-model="options.conversions.distance.metric.centimeters" :disabled="!options.conversions.distance.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
@@ -126,7 +126,7 @@
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.distance.metric.meters">
+                                                    <input type="checkbox" v-model="options.conversions.distance.metric.meters" :disabled="!options.conversions.distance.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
@@ -137,7 +137,7 @@
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.distance.metric.kilometers">
+                                                    <input type="checkbox" v-model="options.conversions.distance.metric.kilometers" :disabled="!options.conversions.distance.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
@@ -154,7 +154,7 @@
                 <div class="col s12">
                     <div id="temperature-options" class="card grey darken-3">
                         <div class="card-image">
-                            <img src="img/temperature.jpg">
+                            <img src="img/temperature.jpg" alt="temperature options background">
                             <span class="card-title">Temperature</span>
                             <div class="switch">
                                 <label class="white-text">
@@ -175,7 +175,7 @@
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.temperature.customary.fahrenheit">
+                                                    <input type="checkbox" v-model="options.conversions.temperature.customary.fahrenheit" :disabled="!options.conversions.temperature.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
@@ -189,7 +189,7 @@
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.temperature.metric.celsius">
+                                                    <input type="checkbox" v-model="options.conversions.temperature.metric.celsius" :disabled="!options.conversions.temperature.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
@@ -206,7 +206,7 @@
                 <div class="col s12">
                     <div id="mass-options" class="card grey darken-3">
                         <div class="card-image">
-                            <img src="img/mass.jpg">
+                            <img src="img/mass.jpg" alt="mass options background">
                             <span class="card-title">Mass</span>
                             <div class="switch">
                                 <label class="white-text">
@@ -227,7 +227,7 @@
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.mass.customary.ounces">
+                                                    <input type="checkbox" v-model="options.conversions.mass.customary.ounces" :disabled="!options.conversions.mass.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
@@ -238,7 +238,7 @@
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.mass.customary.pound">
+                                                    <input type="checkbox" v-model="options.conversions.mass.customary.pound" :disabled="!options.conversions.mass.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
@@ -252,7 +252,7 @@
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.mass.metric.grams">
+                                                    <input type="checkbox" v-model="options.conversions.mass.metric.grams" :disabled="!options.conversions.mass.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
@@ -263,7 +263,7 @@
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.mass.metric.kilograms">
+                                                    <input type="checkbox" v-model="options.conversions.mass.metric.kilograms" :disabled="!options.conversions.mass.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
@@ -280,7 +280,7 @@
                 <div class="col s12">
                     <div id="liquid-volume-options" class="card grey darken-3">
                         <div class="card-image">
-                            <img src="img/liquid-volume.jpg">
+                            <img src="img/liquid-volume.jpg" alt="liquid volume options background">
                             <span class="card-title">Liquid Volume</span>
                             <div class="switch">
                                 <label class="white-text">
@@ -301,7 +301,7 @@
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.liquidVolume.customary.fluidOunces">
+                                                    <input type="checkbox" v-model="options.conversions.liquidVolume.customary.fluidOunces" :disabled="!options.conversions.liquidVolume.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
@@ -312,7 +312,7 @@
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.liquidVolume.customary.pints">
+                                                    <input type="checkbox" v-model="options.conversions.liquidVolume.customary.pints" :disabled="!options.conversions.liquidVolume.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
@@ -323,7 +323,7 @@
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.liquidVolume.customary.quarts">
+                                                    <input type="checkbox" v-model="options.conversions.liquidVolume.customary.quarts" :disabled="!options.conversions.liquidVolume.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
@@ -334,7 +334,7 @@
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.liquidVolume.customary.gallons">
+                                                    <input type="checkbox" v-model="options.conversions.liquidVolume.customary.gallons" :disabled="!options.conversions.liquidVolume.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
@@ -348,7 +348,7 @@
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.liquidVolume.metric.milliliters">
+                                                    <input type="checkbox" v-model="options.conversions.liquidVolume.metric.milliliters" :disabled="!options.conversions.liquidVolume.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
@@ -359,7 +359,7 @@
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.liquidVolume.metric.liters">
+                                                    <input type="checkbox" v-model="options.conversions.liquidVolume.metric.liters" :disabled="!options.conversions.liquidVolume.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
@@ -376,7 +376,7 @@
                 <div class="col s12">
                     <div id="speed-options" class="card grey darken-3">
                         <div class="card-image">
-                            <img src="img/speed.jpg">
+                            <img src="img/speed.jpg" alt="speed options background">
                             <span class="card-title">Speed</span>
                             <div class="switch">
                                 <label class="white-text">
@@ -397,7 +397,7 @@
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.speed.customary.milesPerHour">
+                                                    <input type="checkbox" v-model="options.conversions.speed.customary.milesPerHour" :disabled="!options.conversions.speed.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
@@ -411,7 +411,7 @@
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.speed.metric.kilometersPerHour">
+                                                    <input type="checkbox" v-model="options.conversions.speed.metric.kilometersPerHour" :disabled="!options.conversions.speed.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
