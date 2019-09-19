@@ -109,6 +109,7 @@ var options = new Vue({
                 }
             },
             general:{
+                likeConversions: true,
                 precision: 10
             }
         }
@@ -137,3 +138,6 @@ var options = new Vue({
         this.SaveOptions();
     }
 });
+
+M.Range.init(document.querySelectorAll("input[type=range]"))
+M.Tooltip.init(document.querySelectorAll('.tooltipped'))

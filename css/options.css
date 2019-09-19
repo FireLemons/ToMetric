@@ -45,10 +45,6 @@ End restyle range colors
     margin-bottom: 0;
 }
 
-.row{
-    margin-bottom: 1em;
-}
-
 .card img{
     filter: brightness(.3);
 }
@@ -74,7 +70,7 @@ End restyle range colors
 
 .card-content .flex p{
     font-weight: 500;
-    width: 8em;
+    width: 12em;
 }
 
 .card-content .col:last-child .flex p{
@@ -86,6 +82,14 @@ End restyle range colors
     bottom: 0;
     right: 0;
     padding: 24px;
+}
+
+.help{
+    color: var(--grayMain);
+}
+
+.row{
+    margin-bottom: 1em;
 }
 
 .switch label input[type=checkbox]:checked+.lever{
