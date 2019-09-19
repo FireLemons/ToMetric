@@ -114,9 +114,6 @@ var options = new Vue({
         }
     },
     methods: {
-        SaveOptions: function(){
-
-        },
         _SaveOptions: function(){
             localStorage.setItem("ToMetric.Options", JSON.stringify(this.options));
             M.toast({html: "Options Saved"});
@@ -140,29 +137,3 @@ var options = new Vue({
         this.SaveOptions();
     }
 });
-
-/*
- * Checks if any units for a measurement system for a type of measurement are on
- *
- * param: optionsObject
- *      The object containing the toggled states of types
- *
- * return:
- *      true if any of the options are enabled
- *      false otherwise
- */
-function checkAnyEnabled(optionsObject){
-    const booleanReducer = (are_options_on, key) => are_options_on || optionsObject[key];
-    
-    return Object.keys(optionsObject).reduce(booleanReducer, false);
-}
-
-function setBools(ob, state) {
-    for(var prop in ob) {
-        if(typeof ob[prop] === "boolean") {
-            ob[prop] = state;
-        } else if(typeof ob[prop] === "object") {
-            setBools(ob[prop], state);
-        }
-    }
-}
