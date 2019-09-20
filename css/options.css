@@ -127,3 +127,10 @@ End restyle range colors
 #temperature-options img{
     margin-top: -6%;
 }
+
+@media screen and (max-aspect-ratio: 8/7){
+    .card-content .flex p{
+        font-weight: 500;
+        width: 8em;
+    }
+}
