@@ -2,8 +2,8 @@ var convertToMetric = new Vue({
     el: "#app",
     data: {
         score: 0,
-        answerClass: "grey darken-3",
-        userAnswer: "",
+        answerClass: 'grey darken-3',
+        userAnswer: '',
         
         conversionResult: undefined,
         errorAmount: undefined,
@@ -13,9 +13,9 @@ var convertToMetric = new Vue({
     },
     methods: {
         checkAnswer: function(){
-            var correct = this.given / 2.54;
+            let exactConversion = this.given / 2.54;
             
-            if(Math.abs(correct - this.answer) / correct <= this.tolerance) {
+            if(Math.abs(exactConversion - this.userAnswer) / exactConversion <= this.tolerance) {
                 this.given = Math.ceil(Math.random() * 50);
                 this.score += 1;
                 
@@ -29,5 +29,8 @@ var convertToMetric = new Vue({
                 this.answerClass = "grey darken-3 wrong";
             }
         }
-    }
+    },
+    mounted: function(){
+        
+    },
 });
