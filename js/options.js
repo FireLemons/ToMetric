@@ -6,6 +6,8 @@ Vue.component('measurement-type-options', {
     units: Object
   },
   computed: {
+    // Returns a version of type where the first letter is capitalized
+    //  @return {string} type but the first letter is capitalized
     captializedType: function(){
       let type = this.type
       return type.charAt(0).toUpperCase() + type.slice(1);
@@ -106,11 +108,17 @@ var options = new Vue({
     }
   },
   methods: {
+    // Saves the option data to local storage and displays a toast saying the data is saved
     _SaveOptions: function () {
       localStorage.setItem('ToMetric.Options', JSON.stringify(this.options))
       M.toast({ html: 'Options Saved' })
     },
+    
+    // Placeholder so no error is thrown for the update triggered by loadOptions()
+    SaveOptions: function(){
+    },
 
+    // Loads saved option data if it exists
     loadOptions: function () {
       var options = localStorage.getItem('ToMetric.Options')
 
@@ -121,6 +129,8 @@ var options = new Vue({
   },
   mounted: function () {
     this.loadOptions()
+    
+    // Init SaveOptions after the initial load so it's not called for the update triggered by the initial load
     this.$nextTick(function () {
       this.SaveOptions = _.debounce(this._SaveOptions, 500)
     })
