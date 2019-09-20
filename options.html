@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="css/options.css">
 		<script src="js/materialize.min.js"></script>
         <script src="js/lodash.min.js"></script>
-        <script src="js/vue.min.js"></script>
+        <script src="js/vue.js"></script>
     </head>
     <body>
         <div id="navBar">
@@ -28,7 +28,7 @@
                                     <i class="material-icons left tooltipped" data-position="top" data-tooltip="Acceptable amount of percent error">help</i>
                                 </label>
                                 <p class="range-field">
-                                    <input type="range" min="0" max="100" v-model="options.general.precision"/>
+                                    <input type="range" min="5" max="100" v-model="options.general.precision"/>
                                 </p>
                             </div>
                             <div class="flex">
@@ -59,7 +59,7 @@
                             <div class="switch">
                                 <label class="white-text">
                                     Off
-                                    <input type="checkbox" v-model="distanceOn">
+                                    <input type="checkbox" v-model="options.conversions.distance.on">
                                     <span class="lever"></span>
                                     On
                                 </label>
@@ -177,7 +177,7 @@
                             <div class="switch">
                                 <label class="white-text">
                                     Off
-                                    <input type="checkbox" v-model="temperatureOn">
+                                    <input type="checkbox" v-model="options.conversions.temperature.on">
                                     <span class="lever"></span>
                                     On
                                 </label>
@@ -229,7 +229,7 @@
                             <div class="switch">
                                 <label class="white-text">
                                     Off
-                                    <input type="checkbox" v-model="massOn">
+                                    <input type="checkbox" v-model="options.conversions.mass.on">
                                     <span class="lever"></span>
                                     On
                                 </label>
@@ -303,7 +303,7 @@
                             <div class="switch">
                                 <label class="white-text">
                                     Off
-                                    <input type="checkbox" v-model="liquidVolumeOn">
+                                    <input type="checkbox" v-model="options.conversions.liquidVolume.on">
                                     <span class="lever"></span>
                                     On
                                 </label>
@@ -399,7 +399,7 @@
                             <div class="switch">
                                 <label class="white-text">
                                     Off
-                                    <input type="checkbox" v-model="speedOn">
+                                    <input type="checkbox" v-model="options.conversions.speed.on">
                                     <span class="lever"></span>
                                     On
                                 </label>
@@ -442,6 +442,12 @@
                     </div>
                 </div>
             </div>
+            <measurement-type-options
+                v-bind:background="options.conversions.speed.img"
+                v-bind:enabled="options.conversions.speed.on"
+                type="speed"
+                v-bind:units:="options.conversions.speed"
+            ></measurement-type-options>
         </div>
         <script src="js/nav.js"></script>
         <script src="js/options.js"></script>

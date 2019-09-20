@@ -1,56 +1,43 @@
-var options = new Vue({
-  el: '#options',
+Vue.component('measurement-type-options', {
+  props: {
+    background: String,
+    enabled: Boolean,
+    type: String,
+    units: Object
+  },
   computed: {
-    distanceOn: {
-      get: function () {
-        return this.options.conversions.distance.on
-      },
-      set: function (isEnabled) {
-        this.options.conversions.distance.on = isEnabled
-        this.SaveOptions()
-      }
-    },
-    liquidVolumeOn: {
-      get: function () {
-        return this.options.conversions.liquidVolume.on
-      },
-      set: function (isEnabled) {
-        this.options.conversions.liquidVolume.on = isEnabled
-        this.SaveOptions()
-      }
-    },
-    massOn: {
-      get: function () {
-        return this.options.conversions.mass.on
-      },
-      set: function (isEnabled) {
-        this.options.conversions.mass.on = isEnabled
-        this.SaveOptions()
-      }
-    },
-    speedOn: {
-      get: function () {
-        this.options.conversions.speed.on
-      },
-      set: function (isEnabled) {
-        this.options.conversions.speed.on = isEnabled
-        this.SaveOptions()
-      }
-    },
-    temperatureOn: {
-      get: function () {
-        return this.options.conversions.temperature.on
-      },
-      set: function (isEnabled) {
-        this.options.conversions.temperature.on = isEnabled
-        this.SaveOptions()
-      }
+    captializedType: function(){
+      let type = this.type
+      return type.charAt(0).toUpperCase() + type.slice(1);
     }
   },
+  template: `<div class="row">
+                <div class="col s12">
+                    <div :id="type + '-options'" class="card grey darken-3">
+                        <div class="card-image">
+                            <img :src="background" :alt="type + ' options background'">
+                            <span class="card-title">{{captializedType}}</span>
+                            <div class="switch">
+                                <label class="white-text">
+                                    Off
+                                    <input type="checkbox" v-model="enabled">
+                                    <span class="lever"></span>
+                                    On
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`
+})
+
+var options = new Vue({
+  el: '#options',
   data: {
     options: {
       conversions: {
         distance: {
+          img: 'img/distance.jpg',
           on: true,
           customary: {
             inches: true,
@@ -66,6 +53,7 @@ var options = new Vue({
           }
         },
         liquidVolume: {
+          img: 'img/liquid-volume.jpg',
           on: true,
           customary: {
             gallons: true,
@@ -79,6 +67,7 @@ var options = new Vue({
           }
         },
         mass: {
+          img: 'img/mass.jpg',
           on: true,
           customary: {
             ounces: true,
@@ -90,6 +79,7 @@ var options = new Vue({
           }
         },
         speed: {
+          img: 'img/speed.jpg',
           on: true,
           customary: {
             milesPerHour: true
@@ -99,6 +89,7 @@ var options = new Vue({
           }
         },
         temperature: {
+          img: 'img/temperature.jpg',
           on: true,
           customary: {
             fahrenheit: true
