@@ -1,36 +1,36 @@
-var convertToMetric = new Vue({
-    el: "#app",
-    data: {
-        score: 0,
-        answerClass: 'grey darken-3',
-        userAnswer: '',
-        
-        conversionResult: undefined,
-        errorAmount: undefined,
-        errorPercent: undefined,
-        given: Math.ceil(Math.random() * 50),
-        tolerance: 0.1
-    },
-    methods: {
-        checkAnswer: function(){
-            let exactConversion = this.given / 2.54;
-            
-            if(Math.abs(exactConversion - this.userAnswer) / exactConversion <= this.tolerance) {
-                this.given = Math.ceil(Math.random() * 50);
-                this.score += 1;
-                
-                M.toast({
-                    html: "What a great job you did!!!"
-                });
-                
-                this.answerClass = "grey darken-3";
-                this.answer = "";
-            } else {
-                this.answerClass = "grey darken-3 wrong";
-            }
-        }
-    },
-    mounted: function(){
-        
-    },
-});
+var toMetric = new Vue({
+  el: '#app',
+  data: {
+    score: 0,
+    answerClass: 'grey darken-3',
+    userAnswer: '',
+
+    conversionResult: undefined,
+    errorAmount: undefined,
+    errorPercent: undefined,
+    given: Math.ceil(Math.random() * 50),
+    tolerance: 0.1
+  },
+  methods: {
+    checkAnswer: function () {
+      const exactConversion = this.given / 2.54
+
+      if (Math.abs(exactConversion - this.userAnswer) / exactConversion <= this.tolerance) {
+        this.given = Math.ceil(Math.random() * 50)
+        this.score += 1
+
+        M.toast({
+          html: 'What a great job you did!!!'
+        })
+
+        this.answerClass = 'grey darken-3'
+        this.answer = ''
+      } else {
+        this.answerClass = 'grey darken-3 wrong'
+      }
+    }
+  },
+  mounted: function () {
+
+  }
+})
