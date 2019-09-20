@@ -1,4 +1,57 @@
-var toMetric = new Vue({
+let conversionProblem = class{
+  // @param {number} increment 
+  // @param {number} ratio The ratio for unit conversion
+  // @param {string} imperial The abbreviation for the imperial unit of the conversion
+  // @param {string} metric The abbreviation for the metric unit of the conversion
+  // @param {string} formula The formula for conversion represented in TeX
+  // @param {function} generateImperial(range) A function to generate imperial values for conversions
+  //    @param {number} range A number to limit imperial value generated
+  //    @return {number} A value in imperial units for conversion
+  constructor(ratio, imperial, metric, formula, generateImperial){
+    if(isNaN(ratio)){
+      throw new TypeError('param ratio must be a number')
+    }
+    
+    if(typeof imperial !== 'string'){
+      throw new TypeError('param imperial must be a string')
+    }
+    
+    if(typeof metric !== 'string'){
+      throw new TypeError('param metric must be a string')
+    }
+    
+    if(typeof formula !== 'string'){
+      throw new TypeError('param formula must be a string')
+    }
+    
+    if(typeof generateImperial !== 'function'){
+      throw new TypeError('param generateImperial must be a function')
+    }
+    
+    this.ratio = ratio
+    this.imperial = imperial
+    this.metric = metric
+    this.formula = formula
+    this.generateImperial = generateImperial
+  }
+  
+  // Generates an imperial value and an equivalent metric value
+  //  @param  {number} range Limits the imperial value generated
+  //  @return {object} An object containing an imperial and metric measurement
+  generateConversionPair(range){
+    let imperialMeasurement = this.generateImperial(range)
+    return {
+      imperial: imperialMeasurement,
+      metric: imperialMeasurement * this.ratio
+    }
+  }
+}
+
+const conversionTypes = {
+  
+}
+
+let toMetric = new Vue({
   el: '#app',
   data: {
     score: 0,
