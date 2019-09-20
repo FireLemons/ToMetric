@@ -443,10 +443,8 @@
                 </div>
             </div>
             <measurement-type-options
-                v-bind:background="options.conversions.speed.img"
-                v-bind:enabled="options.conversions.speed.on"
-                type="speed"
-                v-bind:units:="options.conversions.speed"
+                v-bind:type="options.conversions.speed"
+                type_name="speed"
             ></measurement-type-options>
         </div>
         <script src="js/nav.js"></script>

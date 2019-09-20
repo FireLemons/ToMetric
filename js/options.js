@@ -1,28 +1,26 @@
 Vue.component('measurement-type-options', {
   props: {
-    background: String,
-    enabled: Boolean,
-    type: String,
-    units: Object
+    type: Object,
+    type_name: String
   },
   computed: {
     // Returns a version of type where the first letter is capitalized
     //  @return {string} type but the first letter is capitalized
     captializedType: function(){
-      let type = this.type
-      return type.charAt(0).toUpperCase() + type.slice(1);
+      let type_name = this.type_name
+      return type_name.charAt(0).toUpperCase() + type_name.slice(1);
     }
   },
   template: `<div class="row">
                 <div class="col s12">
-                    <div :id="type + '-options'" class="card grey darken-3">
+                    <div :id="type_name + '-options'" class="card grey darken-3">
                         <div class="card-image">
-                            <img :src="background" :alt="type + ' options background'">
+                            <img :src="type.img" :alt="type_name + ' options background'">
                             <span class="card-title">{{captializedType}}</span>
                             <div class="switch">
                                 <label class="white-text">
                                     Off
-                                    <input type="checkbox" v-model="enabled">
+                                    <input type="checkbox" v-model="type.on">
                                     <span class="lever"></span>
                                     On
                                 </label>
