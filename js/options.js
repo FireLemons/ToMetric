@@ -18,6 +18,8 @@ function mapMeasurementTypeUnitsEnable(measurementType){
     }
   }
   
+  mappedMeasurementType.on = measurementType.on
+  
   return mappedMeasurementType
 }
 
@@ -205,12 +207,7 @@ var options = new Vue({
       let {conversions} = this.options
       
       for(key in conversions){
-        let measurementType = conversions[key]
-        setOptions[key] = {
-          on: measurementType.on,
-          customary: measurementType.customary,
-          metric: measurementType.metric
-        }
+        setOptions.conversions[key] = mapMeasurementTypeUnitsEnable(conversions[key])
       }
       
       localStorage.setItem('ToMetric.Options', JSON.stringify(setOptions))
