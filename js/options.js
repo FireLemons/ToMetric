@@ -103,22 +103,46 @@ var options = new Vue({
           img: 'img/liquid-volume.jpg',
           on: true,
           customary: {
-            gallons: true,
-            quarts: true,
-            pints: true,
-            fluidOunces: true
+            gallons: {
+              displayText: 'Gallons',
+              on: true
+            },
+            quarts: {
+              displayText: 'Quarts',
+              on: true
+            },
+            pints: {
+              displayText: 'Pints',
+              on: true
+            },
+            fluidOunces: {
+              displayText: 'Fluid Ounces',
+              on: true
+            }
           },
           metric: {
-            milliliters: true,
-            liters: true
+            milliliters: {
+              displayText: 'Milliliters',
+              on: true
+            },
+            liters: {
+              displayText: 'Liters',
+              on: true
+            }
           }
         },
         mass: {
           img: 'img/mass.jpg',
           on: true,
           customary: {
-            ounces: true,
-            pound: true
+            ounces: {
+              displayText: 'Ounces',
+              on: true
+            },
+            pounds: {
+              displayText: 'Pounds',
+              on: true
+            }
           },
           metric: {
             grams: {
@@ -151,10 +175,16 @@ var options = new Vue({
           img: 'img/temperature.jpg',
           on: true,
           customary: {
-            fahrenheit: true
+            fahrenheit: {
+              displayText: 'Fahrenheit',
+              on: true
+            }
           },
           metric: {
-            celsius: true
+            celsius: {
+              displayText: 'Celsius',
+              on: true
+            }
           }
         }
       },
