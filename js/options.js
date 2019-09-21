@@ -1,3 +1,26 @@
+// Trims the object representing measurement type to just the user set data
+//  @param  {object} measurementType The object to be trimmed
+//  @return {object} only the members of measurementType related to user set data
+function mapMeasurementTypeUnitsEnable(measurementType){
+  let mappedMeasurementType = {}
+  
+  let{customary, metric} = measurementType
+  
+  for(unit in customary){
+    mappedMeasurementType[unit] = {
+      on: customary[unit].on
+    }
+  }
+  
+  for(unit in metric){
+    mappedMeasurementType[unit] = {
+      on: metric[unit].on
+    }
+  }
+  
+  return mappedMeasurementType
+}
+
 Vue.component('measurement-type-options', {
   props: {
     type: Object,
@@ -40,16 +63,40 @@ var options = new Vue({
           img: 'img/distance.jpg',
           on: true,
           customary: {
-            inches: true,
-            feet: true,
-            yards: true,
-            miles: true
+            inches: {
+              displayText: 'Inches',
+              on: true
+            },
+            feet: {
+              displayText: 'Feet',
+              on: true
+            },
+            yards: {
+              displayText: 'Yards',
+              on: true
+            },
+            miles: {
+              displayText: 'Miles',
+              on: true
+            }
           },
           metric: {
-            millimeters: true,
-            centimeters: true,
-            meters: true,
-            kilometers: true
+            millimeters: {
+              displayText: 'Milliliters',
+              on: true
+            },
+            centimeters: {
+              displayText: 'Centimeters',
+              on: true
+            },
+            meters: {
+              displayText: 'Meters',
+              on: true
+            },
+            kilometers: {
+              displayText: 'Kilometers',
+              on: true
+            }
           }
         },
         liquidVolume: {
@@ -74,18 +121,30 @@ var options = new Vue({
             pound: true
           },
           metric: {
-            grams: true,
-            kilograms: true
+            grams: {
+              displayText: 'Grams',
+              on: true
+            },
+            kilograms: {
+              displayText: 'Kilograms',
+              on: true
+            }
           }
         },
         speed: {
           img: 'img/speed.jpg',
           on: true,
           customary: {
-            milesPerHour: true
+            milesPerHour: {
+              displayText: 'Miles/Hour',
+              on: true
+            }
           },
           metric: {
-            kilometersPerHour: true
+            kilometersPerHour: {
+              displayText: 'Kilometers/Hour',
+              on: true
+            }
           }
         },
         temperature: {
@@ -108,7 +167,23 @@ var options = new Vue({
   methods: {
     // Saves the option data to local storage and displays a toast saying the data is saved
     _SaveOptions: function () {
-      localStorage.setItem('ToMetric.Options', JSON.stringify(this.options))
+      let setOptions = {
+          conversions: {},
+          general: this.options.general
+      }
+      
+      let {conversions} = this.options
+      
+      for(key in conversions){
+        let measurementType = conversions[key]
+        setOptions[key] = {
+          on: measurementType.on,
+          customary: measurementType.customary,
+          metric: measurementType.metric
+        }
+      }
+      
+      localStorage.setItem('ToMetric.Options', JSON.stringify(setOptions))
       M.toast({ html: 'Options Saved' })
     },
     
@@ -121,7 +196,7 @@ var options = new Vue({
       var options = localStorage.getItem('ToMetric.Options')
 
       if (options) {
-        this.options = JSON.parse(options)
+        _.merge(this.options, JSON.parse(options))
       }
     }
   },
