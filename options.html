@@ -252,11 +252,11 @@
                                             </div>
                                         </div>
                                         <div class="flex">
-                                            <p class="white-text">Pound</p>
+                                            <p class="white-text">Pounds</p>
                                             <div class="switch">
                                                 <label class="white-text">
                                                     Off
-                                                    <input type="checkbox" v-model="options.conversions.mass.customary.pound" :disabled="!options.conversions.mass.on">
+                                                    <input type="checkbox" v-model="options.conversions.mass.customary.pounds" :disabled="!options.conversions.mass.on">
                                                     <span class="lever"></span>
                                                     On
                                                 </label>
@@ -390,61 +390,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col s12">
-                    <div id="speed-options" class="card grey darken-3">
-                        <div class="card-image">
-                            <img src="img/speed.jpg" alt="speed options background">
-                            <span class="card-title">Speed</span>
-                            <div class="switch">
-                                <label class="white-text">
-                                    Off
-                                    <input type="checkbox" v-model="options.conversions.speed.on">
-                                    <span class="lever"></span>
-                                    On
-                                </label>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col s6">
-                                        <p class="title white-text">Customary/Imperial</p>
-                                        <div class="flex">
-                                            <p class="white-text">Miles/Hour</p>
-                                            <div class="switch">
-                                                <label class="white-text">
-                                                    Off
-                                                    <input type="checkbox" v-model="options.conversions.speed.customary.milesPerHour" :disabled="!options.conversions.speed.on">
-                                                    <span class="lever"></span>
-                                                    On
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col s6 right-align">
-                                        <p class="title white-text">Metric</p>
-                                        <div class="flex">
-                                            <p class="white-text">Kilometers/Hour</p>
-                                            <div class="switch">
-                                                <label class="white-text">
-                                                    Off
-                                                    <input type="checkbox" v-model="options.conversions.speed.metric.kilometersPerHour" :disabled="!options.conversions.speed.on">
-                                                    <span class="lever"></span>
-                                                    On
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <measurement-type-options
-                v-bind:type="options.conversions.speed"
-                type_name="speed"
+                v-bind.sync="options.conversions.speed"
             ></measurement-type-options>
         </div>
         <script src="js/nav.js"></script>

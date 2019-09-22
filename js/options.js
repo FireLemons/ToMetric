@@ -23,29 +23,55 @@ function mapMeasurementTypeUnitsEnable(measurementType){
   return mappedMeasurementType
 }
 
+Vue.component('unit-switch', {
+  model: {
+    prop: 'on',
+    event: 'change'
+  },
+  props: {
+    displayText: String,
+    enabled: Boolean,
+    on: Boolean
+  },
+  template: `<div class="flex">
+                <p class="white-text">{{displayText}}</p>
+                <div class="switch">
+                    <label class="white-text">
+                        Off
+                        <input type="checkbox" :checked="on" v-on:change="$emit('change', $event.target.checked)" :disabled="!enabled">
+                        <span class="lever"></span>
+                        On
+                    </label>
+                </div>
+            </div>`
+})
+
 Vue.component('measurement-type-options', {
   props: {
-    type: Object,
-    type_name: String
+    customary: Object,
+    metric: Object,
+    on: Boolean,
+    img: String,
+    name: String
   },
   computed: {
     // Returns a version of type where the first letter is capitalized
     //  @return {string} type but the first letter is capitalized
     captializedType: function(){
-      let type_name = this.type_name
-      return type_name.charAt(0).toUpperCase() + type_name.slice(1);
+      let name = this.name
+      return name.charAt(0).toUpperCase() + name.slice(1);
     }
   },
   template: `<div class="row">
                 <div class="col s12">
-                    <div :id="type_name + '-options'" class="card grey darken-3">
+                    <div :id="name + '-options'" class="card grey darken-3">
                         <div class="card-image">
-                            <img :src="type.img" :alt="type_name + ' options background'">
+                            <img :src="img" :alt="name + ' options background'">
                             <span class="card-title">{{captializedType}}</span>
                             <div class="switch">
                                 <label class="white-text">
                                     Off
-                                    <input type="checkbox" v-model="type.on">
+                                    <input type="checkbox" :checked="on" @change="$emit('update:on', $event.target.checked)">
                                     <span class="lever"></span>
                                     On
                                 </label>
@@ -159,6 +185,7 @@ var options = new Vue({
         },
         speed: {
           img: 'img/speed.jpg',
+          name: 'speed',
           on: true,
           customary: {
             milesPerHour: {
