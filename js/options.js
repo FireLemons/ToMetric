@@ -2,18 +2,21 @@
 //  @param  {object} measurementType The object to be trimmed
 //  @return {object} only the members of measurementType related to user set data
 function mapMeasurementTypeUnitsEnable(measurementType){
-  let mappedMeasurementType = {}
+  let mappedMeasurementType = {
+      customary: {},
+      metric: {}
+  }
   
   let{customary, metric} = measurementType
   
   for(unit in customary){
-    mappedMeasurementType[unit] = {
+    mappedMeasurementType.customary[unit] = {
       on: customary[unit].on
     }
   }
   
   for(unit in metric){
-    mappedMeasurementType[unit] = {
+    mappedMeasurementType.metric[unit] = {
       on: metric[unit].on
     }
   }
@@ -24,21 +27,23 @@ function mapMeasurementTypeUnitsEnable(measurementType){
 }
 
 Vue.component('unit-switch', {
-  model: {
-    prop: 'on',
-    event: 'change'
-  },
   props: {
     displayText: String,
     enabled: Boolean,
     on: Boolean
+  },
+  methods: {
+    notifyDataChanged: function($event){
+      this.$emit('update:on', $event.target.checked)
+      options.$emit('changed-data')
+    }
   },
   template: `<div class="flex">
                 <p class="white-text">{{displayText}}</p>
                 <div class="switch">
                     <label class="white-text">
                         Off
-                        <input type="checkbox" :checked="on" v-on:change="$emit('change', $event.target.checked)" :disabled="!enabled">
+                        <input type="checkbox" :checked="on" @change="notifyDataChanged" :disabled="!enabled">
                         <span class="lever"></span>
                         On
                     </label>
@@ -77,12 +82,27 @@ Vue.component('measurement-type-options', {
                                 </label>
                             </div>
                         </div>
+                        <div class="card-content">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col s6">
+                                        <p class="title white-text">Customary/Imperial</p>
+                                        <unit-switch 
+                                            v-for="unit in customary"
+                                            :displayText="unit.displayText"
+                                            :enabled="on"
+                                            v-bind:on.sync="unit.on"
+                                        ></unit-switch>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>`
 })
 
-var options = new Vue({
+let options = new Vue({
   el: '#options',
   data: {
     options: {
@@ -247,10 +267,10 @@ var options = new Vue({
 
     // Loads saved option data if it exists
     loadOptions: function () {
-      var options = localStorage.getItem('ToMetric.Options')
+      var savedOptions = localStorage.getItem('ToMetric.Options')
 
-      if (options) {
-        _.merge(this.options, JSON.parse(options))
+      if (savedOptions) {
+        _.merge(this.options, JSON.parse(savedOptions))
       }
     }
   },
@@ -265,6 +285,11 @@ var options = new Vue({
   updated: function () {
     this.SaveOptions()
   }
+})
+
+// Notify parent when its data is updated in a child component
+options.$on('changed-data', function(){
+  this.SaveOptions()
 })
 
 M.Range.init(document.querySelectorAll('input[type=range]'))
