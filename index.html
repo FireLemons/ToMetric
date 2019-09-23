@@ -8,7 +8,14 @@
 		<script src="js/lodash.min.js"></script>
 		<script src="js/materialize.min.js"></script>
 		<script src="js/vue.min.js"></script>
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML' async></script>
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+            CommonHTML: {
+              scale: 130
+            }
+          });
+        </script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML' async></script>
 	</head>
 	<body class="grey darken-4">
 		<div id="navBar">
@@ -48,7 +55,7 @@
                                 Exact Conversion
                             </span>
                             <span>
-                                {{ conversionResult ? conversionResult : '-' }}
+                                {{ exactConversionDisplay ? exactConversionDisplay : '-' }}
                             </span>
                         </div>
                     </div>
@@ -64,12 +71,12 @@
 				<div class="flex">
                     <div class="flex">
                         <input type="number" class="grey darken-3" v-model="given" readonly>
-                        <input type="text" value="cm" disabled>
+                        <input type="text" :value="imperialAbbrev" disabled>
                     </div>
                     <label> = </label>
                     <div class="flex">
                         <input class="input-field" type="number" v-bind:class="answerClass" v-model="userAnswer" @keyup.enter="checkAnswer">
-                        <input type="text" value="in" disabled>
+                        <input type="text" :value="metricAbbrev" disabled>
                     </div>
 				</div>
 			</div>
