@@ -50,181 +50,20 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col s12">
-                    <div id="distance-options" class="card grey darken-3">
-                        <div class="card-image">
-                            <img src="img/distance.jpg" alt="distance options background">
-                            <span class="card-title">Distance</span>
-                            <div class="switch">
-                                <label class="white-text">
-                                    Off
-                                    <input type="checkbox" v-model="options.conversions.distance.on">
-                                    <span class="lever"></span>
-                                    On
-                                </label>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col s6">
-                                        <p class="title white-text">Customary/Imperial</p>
-                                        <div class="flex">
-                                            <p class="white-text">Inches</p>
-                                            <div class="switch">
-                                                <label class="white-text">
-                                                    Off
-                                                    <input type="checkbox" v-model="options.conversions.distance.customary.inches" :disabled="!options.conversions.distance.on">
-                                                    <span class="lever"></span>
-                                                    On
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="white-text">Feet</p>
-                                            <div class="switch">
-                                                <label class="white-text">
-                                                    Off
-                                                    <input type="checkbox" v-model="options.conversions.distance.customary.feet" :disabled="!options.conversions.distance.on">
-                                                    <span class="lever"></span>
-                                                    On
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="white-text">Yards</p>
-                                            <div class="switch">
-                                                <label class="white-text">
-                                                    Off
-                                                    <input type="checkbox" v-model="options.conversions.distance.customary.yards" :disabled="!options.conversions.distance.on">
-                                                    <span class="lever"></span>
-                                                    On
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="white-text">Miles</p>
-                                            <div class="switch">
-                                                <label class="white-text">
-                                                    Off
-                                                    <input type="checkbox" v-model="options.conversions.distance.customary.miles" :disabled="!options.conversions.distance.on">
-                                                    <span class="lever"></span>
-                                                    On
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col s6 right-align">
-                                        <p class="title white-text">Metric</p>
-                                        <div class="flex">
-                                            <p class="white-text">Millimeters</p>
-                                            <div class="switch">
-                                                <label class="white-text">
-                                                    Off
-                                                    <input type="checkbox" v-model="options.conversions.distance.metric.millimeters" :disabled="!options.conversions.distance.on">
-                                                    <span class="lever"></span>
-                                                    On
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="white-text">Centimeters</p>
-                                            <div class="switch">
-                                                <label class="white-text">
-                                                    Off
-                                                    <input type="checkbox" v-model="options.conversions.distance.metric.centimeters" :disabled="!options.conversions.distance.on">
-                                                    <span class="lever"></span>
-                                                    On
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="white-text">Meters</p>
-                                            <div class="switch">
-                                                <label class="white-text">
-                                                    Off
-                                                    <input type="checkbox" v-model="options.conversions.distance.metric.meters" :disabled="!options.conversions.distance.on">
-                                                    <span class="lever"></span>
-                                                    On
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="flex">
-                                            <p class="white-text">Kilometers</p>
-                                            <div class="switch">
-                                                <label class="white-text">
-                                                    Off
-                                                    <input type="checkbox" v-model="options.conversions.distance.metric.kilometers" :disabled="!options.conversions.distance.on">
-                                                    <span class="lever"></span>
-                                                    On
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12">
-                    <div id="temperature-options" class="card grey darken-3">
-                        <div class="card-image">
-                            <img src="img/temperature.jpg" alt="temperature options background">
-                            <span class="card-title">Temperature</span>
-                            <div class="switch">
-                                <label class="white-text">
-                                    Off
-                                    <input type="checkbox" v-model="options.conversions.temperature.on">
-                                    <span class="lever"></span>
-                                    On
-                                </label>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col s6">
-                                        <p class="title white-text">Customary/Imperial</p>
-                                        <div class="flex">
-                                            <p class="white-text">Fahrenheit</p>
-                                            <div class="switch">
-                                                <label class="white-text">
-                                                    Off
-                                                    <input type="checkbox" v-model="options.conversions.temperature.customary.fahrenheit" :disabled="!options.conversions.temperature.on">
-                                                    <span class="lever"></span>
-                                                    On
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col s6 right-align">
-                                        <p class="title white-text">Metric</p>
-                                        <div class="flex">
-                                            <p class="white-text">Celsius</p>
-                                            <div class="switch">
-                                                <label class="white-text">
-                                                    Off
-                                                    <input type="checkbox" v-model="options.conversions.temperature.metric.celsius" :disabled="!options.conversions.temperature.on">
-                                                    <span class="lever"></span>
-                                                    On
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <measurement-type-options
-                v-bind.sync="options.conversions.liquidVolume"
+                v-bind.sync="options.measurements.distance"
             ></measurement-type-options>
             <measurement-type-options
-                v-bind.sync="options.conversions.speed"
+                v-bind.sync="options.measurements.mass"
+            ></measurement-type-options>
+            <measurement-type-options
+                v-bind.sync="options.measurements.temperature"
+            ></measurement-type-options>
+            <measurement-type-options
+                v-bind.sync="options.measurements.liquidVolume"
+            ></measurement-type-options>
+            <measurement-type-options
+                v-bind.sync="options.measurements.speed"
             ></measurement-type-options>
         </div>
         <script src="js/nav.js"></script>

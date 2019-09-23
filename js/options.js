@@ -122,9 +122,10 @@ let options = new Vue({
   el: '#options',
   data: {
     options: {
-      conversions: {
+      measurements: {
         distance: {
           img: 'img/distance.jpg',
+          name: 'distance',
           on: true,
           customary: {
             inches: {
@@ -240,6 +241,7 @@ let options = new Vue({
         },
         temperature: {
           img: 'img/temperature.jpg',
+          name: 'temperature',
           on: true,
           customary: {
             fahrenheit: {
@@ -265,14 +267,14 @@ let options = new Vue({
     // Saves the option data to local storage and displays a toast saying the data is saved
     _SaveOptions: function () {
       let setOptions = {
-          conversions: {},
+          measurements: {},
           general: this.options.general
       }
       
-      let {conversions} = this.options
+      let {measurements} = this.options
       
-      for(key in conversions){
-        setOptions.conversions[key] = mapMeasurementTypeUnitsEnable(conversions[key])
+      for(key in measurements){
+        setOptions.measurements[key] = mapMeasurementTypeUnitsEnable(measurements[key])
       }
       
       localStorage.setItem('ToMetric.Options', JSON.stringify(setOptions))
