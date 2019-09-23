@@ -62,9 +62,16 @@ Vue.component('measurement-type-options', {
   computed: {
     // Returns a version of type where the first letter is capitalized
     //  @return {string} type but the first letter is capitalized
-    captializedType: function(){
+    displayType: function(){
       let name = this.name
-      return name.charAt(0).toUpperCase() + name.slice(1);
+      let displayType = ''
+      let words = name.split('-')
+      
+      for(let word of words){
+        displayType += `${word.charAt(0).toUpperCase()}${word.slice(1)} `
+      }
+      
+      return displayType;
     }
   },
   template: `<div class="row">
@@ -72,7 +79,7 @@ Vue.component('measurement-type-options', {
                     <div :id="name + '-options'" class="card grey darken-3">
                         <div class="card-image">
                             <img :src="img" :alt="name + ' options background'">
-                            <span class="card-title">{{captializedType}}</span>
+                            <span class="card-title">{{displayType}}</span>
                             <div class="switch">
                                 <label class="white-text">
                                     Off
@@ -89,6 +96,15 @@ Vue.component('measurement-type-options', {
                                         <p class="title white-text">Customary/Imperial</p>
                                         <unit-switch 
                                             v-for="unit in customary"
+                                            :displayText="unit.displayText"
+                                            :enabled="on"
+                                            v-bind:on.sync="unit.on"
+                                        ></unit-switch>
+                                    </div>
+                                    <div class="col s6 right-align">
+                                        <p class="title white-text">Metric</p>
+                                        <unit-switch 
+                                            v-for="unit in metric"
                                             :displayText="unit.displayText"
                                             :enabled="on"
                                             v-bind:on.sync="unit.on"
@@ -149,6 +165,7 @@ let options = new Vue({
         },
         liquidVolume: {
           img: 'img/liquid-volume.jpg',
+          name: 'liquid-volume',
           on: true,
           customary: {
             gallons: {
@@ -181,6 +198,7 @@ let options = new Vue({
         },
         mass: {
           img: 'img/mass.jpg',
+          name: 'mass',
           on: true,
           customary: {
             ounces: {
