@@ -24,7 +24,7 @@
 		<div id="app" class="container">
 			<div id="display" class="card grey darken-3">
 				<div class="card-content">
-					<span class="card-title activator grey darken-2">Show Formula<i class="material-icons right">keyboard_arrow_down</i></span>
+					<span class="card-title center-align activator grey darken-2">Show Formula</span>
                     <div id="stats" class="flex">
                         <div class="flex">
                             <span>
@@ -61,16 +61,14 @@
                     </div>
 				</div>
 				<div class="card-reveal grey darken-3">
-					<span class="card-title grey darken-2">Back to stats<i class="material-icons right">keyboard_arrow_up</i></span>
-					<div>
-						\[ 1\,\mathrm{in} = 2.54\,\mathrm{cm} \]
-					</div>
+					<span class="card-title center-align grey darken-2">Back to stats</span>
+					<div id="formula"><!--Math formulas rendered here--></div>
 				</div>
 			</div>
 			<div id="conversionInput">
 				<div class="flex">
                     <div class="flex">
-                        <input type="number" class="grey darken-3" v-model="given" readonly>
+                        <input type="number" class="grey darken-2" v-model="given" readonly>
                         <input type="text" :value="imperialAbbrev" disabled>
                     </div>
                     <label> = </label>

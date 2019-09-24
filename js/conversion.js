@@ -11,7 +11,7 @@ function generateFormula(ratio, imperial, metric){
     coefficientMagnitude[2] = coefficientMagnitude[2].substr(1)
   }
   
-  return `1\\,\\mathrm{${imperial}} = ${coefficientMagnitude[1]}\\,\\mathrm{${metric}}` + (coefficientMagnitude[2] === '0' ? '' : `\\times 10^{${coefficientMagnitude[2]}}`)
+  return `\\[ 1\\,\\mathrm{${imperial}} = ${coefficientMagnitude[1]}\\,\\mathrm{${metric}}` + (coefficientMagnitude[2] === '0' ? '' : `\\times 10^{${coefficientMagnitude[2]}}` + '\\]')
 }
 
 let conversionProblemType = class{
@@ -63,11 +63,16 @@ let conversionProblemType = class{
   }
 }
 
+// configuration
+const config = JSON.parse(localStorage.getItem('ToMetric.Options'))
+
 const conversionTypes = {
   inchesmillimeters: null,
-  inchescentimeters: null,
+  inchescentimeters: new conversionProblemType(2.54, 'in', 'cm', (range) => {
+    return 1 + 0.1 * Math.ceil(Math.random() * range)
+  }),
   inchesmeters: new conversionProblemType(0.0254, 'in', 'm', (range) => {
-    return 20 + 10 * Math.ceil(Math.random() * range)
+    return 10 + 10 * Math.ceil(Math.random() * range)
   }),
   incheskilometers: null,
   feetmillimeters: null,
@@ -84,7 +89,14 @@ const conversionTypes = {
   mileskilometers: null
 }
 
-const config = JSON.parse(localStorage.getItem('ToMetric.Options'))
+// Init mathjax tools
+// Renders TeX code in the formula div
+function renderTeX(TeX){
+  MathJax.Hub.Queue(
+    function(){document.getElementById('formula').innerHTML = TeX},
+    ["Typeset", MathJax.Hub, 'formula']
+  );
+}
 
 let toMetric = new Vue({
   el: '#app',
@@ -100,6 +112,8 @@ let toMetric = new Vue({
     userAnswer: '',
     exactConversion: 0,
     metricAbbrev: '',
+    
+    formula: '',
     
     tolerance: 1 / config.general.precision
   },
@@ -127,6 +141,9 @@ let toMetric = new Vue({
       
       this.given = conversionPair['imperial']
       this.exactConversion = conversionPair['metric']
+      
+      this.formula = problem.formula
+      renderTeX(problem.formula)
     },
     onCorrect: function(){
       this.score += 1
