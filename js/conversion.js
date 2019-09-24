@@ -63,9 +63,6 @@ let conversionProblemType = class{
   }
 }
 
-// configuration
-const config = JSON.parse(localStorage.getItem('ToMetric.Options'))
-
 const conversionTypes = {
   inchesmillimeters: new conversionProblemType(25.4, 'in', 'mm', (range) => {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
@@ -118,19 +115,39 @@ const conversionTypes = {
   })
 }
 
-let measurementType = config.measurements.distance
+// configure
+const config = JSON.parse(localStorage.getItem('ToMetric.Options'))
 
-for(let customaryUnit in measurementType.customary){
-  let customaryUnitEnabled = measurementType.customary[customaryUnit].on
+// removes all disabled problems for a measurementType
+//  @param  {object} measurementType The object representing the measurement type(e.g. distance) from the config
+function pruneDisabledProblems(measurementType){
+  let customaryUnits = measurementType.customary
+  let metricUnits = measurementType.metric
+
+  for(let customaryUnit in customaryUnits){
+    let customaryUnitEnabled = customaryUnits[customaryUnit].on
   
-  for(let metricUnit in measurementType.metric){
-    let metricUnitEnabled = measurementType.metric[metricUnit].on
+    for(let metricUnit in metricUnits){
+      let metricUnitEnabled = metricUnits[metricUnit].on
     
-    if(!(customaryUnitEnabled && metricUnitEnabled)){
-      delete conversionTypes[customaryUnit + metricUnit]
+      if(!(customaryUnitEnabled && metricUnitEnabled)){
+        delete conversionTypes[customaryUnit + metricUnit]
+      }
     }
   }
 }
+
+if(config){
+  let measurements = Object.values(config.measurements)
+  
+  measurements.forEach((measurementType) => {
+    pruneDisabledProblems(measurementType)
+  })
+} else {
+  //prune the conversions where the magnitudes of the units are too far apart
+}
+
+let measurementType = config.measurements.distance
 
 // Init mathjax tools
 // Renders TeX code in the formula div
