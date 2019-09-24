@@ -118,6 +118,20 @@ const conversionTypes = {
   })
 }
 
+let measurementType = config.measurements.distance
+
+for(let customaryUnit in measurementType.customary){
+  let customaryUnitEnabled = measurementType.customary[customaryUnit].on
+  
+  for(let metricUnit in measurementType.metric){
+    let metricUnitEnabled = measurementType.metric[metricUnit].on
+    
+    if(!(customaryUnitEnabled && metricUnitEnabled)){
+      delete conversionTypes[customaryUnit + metricUnit]
+    }
+  }
+}
+
 // Init mathjax tools
 // Renders TeX code in the formula div
 function renderTeX(TeX){
