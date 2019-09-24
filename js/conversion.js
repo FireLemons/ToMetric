@@ -67,26 +67,55 @@ let conversionProblemType = class{
 const config = JSON.parse(localStorage.getItem('ToMetric.Options'))
 
 const conversionTypes = {
-  inchesmillimeters: null,
+  inchesmillimeters: new conversionProblemType(25.4, 'in', 'mm', (range) => {
+    return 1 + 0.1 * Math.ceil(Math.random() * range)
+  }),
   inchescentimeters: new conversionProblemType(2.54, 'in', 'cm', (range) => {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
   }),
   inchesmeters: new conversionProblemType(0.0254, 'in', 'm', (range) => {
     return 10 + 10 * Math.ceil(Math.random() * range)
   }),
-  incheskilometers: null,
-  feetmillimeters: null,
-  feetcentimeters: null,
-  feetmeters: null,
-  feetkilometers: null,
-  yardsmillimeters: null,
-  yardscentimeters: null,
-  yardsmeters: null,
-  yardskilometers: null,
-  milesmillimeters: null,
-  milescentimeters: null,
-  milesmeters: null,
-  mileskilometers: null
+  incheskilometers: new conversionProblemType(0.0000254, 'in', 'km', (range) => {
+    range *= 2
+    return 10000 + 5000 * Math.ceil(Math.random() * range)
+  }),
+  feetmillimeters: new conversionProblemType(304.8, 'ft', 'mm', (range) => {
+    return 1 + 0.1 * Math.ceil(Math.random() * range)
+  }),
+  feetcentimeters: new conversionProblemType(30.48, 'ft', 'cm', (range) => {
+    return 1 + 0.1 * Math.ceil(Math.random() * range)
+  }),
+  feetmeters: new conversionProblemType(0.3048, 'ft', 'm', (range) => {
+    return 1 + 1 * Math.ceil(Math.random() * range)
+  }),
+  feetkilometers: new conversionProblemType(0.0003048, 'ft', 'km', (range) => {
+    return 1000 + 500 * Math.ceil(Math.random() * range)
+  }),
+  yardsmillimeters: new conversionProblemType(914.4, 'yd', 'mm', (range) => {
+    return 1 + .1 * Math.ceil(Math.random() * range)
+  }),
+  yardscentimeters: new conversionProblemType(91.44, 'yd', 'cm', (range) => {
+    return 1 + .1 * Math.ceil(Math.random() * range)
+  }),
+  yardsmeters: new conversionProblemType(.9144, 'yd', 'm', (range) => {
+    return 1 + 1 * Math.ceil(Math.random() * range)
+  }),
+  yardskilometers: new conversionProblemType(.0009144, 'yd', 'km', (range) => {
+    return 100 + 50 * Math.ceil(Math.random() * range)
+  }),
+  milesmillimeters: new conversionProblemType(1609344, 'mi', 'mm', (range) => {
+    return 1 + .1 * Math.ceil(Math.random() * range)
+  }),
+  milescentimeters: new conversionProblemType(160934.4, 'mi', 'cm', (range) => {
+    return 1 + .1 * Math.ceil(Math.random() * range)
+  }),
+  milesmeters: new conversionProblemType(1609.344, 'mi', 'm', (range) => {
+    return 1 + .1 * Math.ceil(Math.random() * range)
+  }),
+  mileskilometers: new conversionProblemType(1.609, 'mi', 'cm', (range) => {
+    return 1 + 1 * Math.ceil(Math.random() * range)
+  })
 }
 
 // Init mathjax tools
