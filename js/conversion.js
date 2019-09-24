@@ -11,7 +11,7 @@ function generateFormula(ratio, imperial, metric){
     coefficientMagnitude[2] = coefficientMagnitude[2].substr(1)
   }
   
-  return `\\[ 1\\,\\mathrm{${imperial}} = ${coefficientMagnitude[1]}\\,\\mathrm{${metric}}` + (coefficientMagnitude[2] === '0' ? '' : `\\times 10^{${coefficientMagnitude[2]}}` + '\\]')
+  return `\\[ 1\\,\\mathrm{${imperial}} = ${coefficientMagnitude[1]}\\,\\mathrm{${metric}}` + (coefficientMagnitude[2] === '0' ? '' : `\\times 10^{${coefficientMagnitude[2]}}`) + '\\]'
 }
 
 let conversionProblemType = class{
@@ -147,6 +147,8 @@ if(config){
   //prune the conversions where the magnitudes of the units are too far apart
 }
 
+const problems = Object.values(conversionTypes)
+
 let measurementType = config.measurements.distance
 
 // Init mathjax tools
@@ -162,6 +164,7 @@ let toMetric = new Vue({
   el: '#app',
   data: {
     score: 0,
+    difficulty: 10,
     errorPercent: undefined,
     errorAmount: undefined,
     exactConversionDisplay: undefined,
@@ -188,16 +191,19 @@ let toMetric = new Vue({
         this.answerClass = 'grey darken-3 wrong'
       }
     },
+    getProblem: function(){
+      return problems[Math.floor(Math.random() * problems.length)]
+    },
     loadNewProblem: function(){
       this.answerClass = 'grey darken-3'
       this.userAnswer = ''
       
-      let problem = conversionTypes['inchesmeters']
+      let problem = this.getProblem()
       
       this.imperialAbbrev = problem.imperial
       this.metricAbbrev = problem.metric
       
-      let conversionPair = problem.generateConversionPair(10)
+      let conversionPair = problem.generateConversionPair(this.difficulty)
       
       this.given = conversionPair['imperial']
       this.exactConversion = conversionPair['metric']
