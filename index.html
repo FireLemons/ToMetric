@@ -28,34 +28,26 @@
                     <div id="stats" class="flex">
                         <div class="flex">
                             <span>
-                                Score
+                                Level
                             </span>
                             <span>
-                                {{ score }}
-                            </span>
-                        </div>
-                        <div class="flex">
-                            <span>
-                                %Error
-                            </span>
-                            <span>
-                                {{ errorPercent ? errorPercent : '-' }}
+                                {{ level }}
                             </span>
                         </div>
                         <div class="flex">
                             <span>
-                                Error Amount
+                                Level Progress
                             </span>
                             <span>
-                                {{ errorAmount ? errorAmount : '-' }}
+                                {{ levelUpProgress }}/{{ levelUpQuota }}
                             </span>
                         </div>
                         <div class="flex">
                             <span>
-                                Exact Conversion
+                                Difficulty
                             </span>
                             <span>
-                                {{ exactConversionDisplay ? exactConversionDisplay : '-' }}
+                                {{ difficulty }}
                             </span>
                         </div>
                     </div>

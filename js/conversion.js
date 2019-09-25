@@ -161,11 +161,10 @@ function renderTeX (TeX) {
 const toMetric = new Vue({
   el: '#app',
   data: {
-    score: 0,
+    level: 0,
+    levelUpProgress: 0,
+    levelUpQuota: 2,
     difficulty: 10,
-    errorPercent: undefined,
-    errorAmount: undefined,
-    exactConversionDisplay: undefined,
 
     given: 0,
     imperialAbbrev: '',
@@ -175,15 +174,22 @@ const toMetric = new Vue({
     metricAbbrev: '',
 
     formula: '',
+    
+    roundStats: [],
 
     tolerance: 1 / config.general.precision
   },
   methods: {
     checkAnswer: function () {
       const exactConversion = this.exactConversion
+      let percentError = Math.abs(exactConversion - this.userAnswer) / exactConversion
 
-      if (Math.abs(exactConversion - this.userAnswer) / exactConversion <= this.tolerance) {
-        this.onCorrect()
+      if (percentError <= this.tolerance) {
+        this.onCorrect({
+          errorPercent: percentError,
+          errorAmount: Math.abs(this.userAnswer - exactConversion),
+          exactConversion: exactConversion
+        })
         this.loadNewProblem()
       } else {
         this.answerClass = 'grey darken-3 wrong'
@@ -209,8 +215,24 @@ const toMetric = new Vue({
       this.formula = problem.formula
       renderTeX(problem.formula)
     },
-    onCorrect: function () {
-      this.score += 1
+    onCorrect: function (problemStats) {
+      if(this.levelUpProgress === this.levelUpQuota){
+        this.levelUpProgress = 0
+        this.onLevelUp()
+      } else {
+        this.levelUpProgress += 1
+      }
+      
+      this.roundStats.push(problemStats)
+    },
+    onLevelUp: function(){
+      let roll = Math.random()
+      
+      if(roll < 0.5){
+        this.difficulty += 1
+      } else {
+        this.levelUpQuota += 1
+      }
     }
   },
   mounted: function () {
