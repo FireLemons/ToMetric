@@ -1,28 +1,28 @@
 // Trims the object representing measurement type to just the user set data
 //  @param  {object} measurementType The object to be trimmed
 //  @return {object} only the members of measurementType related to user set data
-function mapMeasurementTypeUnitsEnable(measurementType){
-  let mappedMeasurementType = {
-      customary: {},
-      metric: {}
+function mapMeasurementTypeUnitsEnable (measurementType) {
+  const mappedMeasurementType = {
+    customary: {},
+    metric: {}
   }
-  
-  let{customary, metric} = measurementType
-  
-  for(unit in customary){
+
+  const { customary, metric } = measurementType
+
+  for (const unit in customary) {
     mappedMeasurementType.customary[unit] = {
       on: customary[unit].on
     }
   }
-  
-  for(unit in metric){
+
+  for (const unit in metric) {
     mappedMeasurementType.metric[unit] = {
       on: metric[unit].on
     }
   }
-  
+
   mappedMeasurementType.on = measurementType.on
-  
+
   return mappedMeasurementType
 }
 
@@ -33,7 +33,7 @@ Vue.component('unit-switch', {
     on: Boolean
   },
   methods: {
-    notifyDataChanged: function($event){
+    notifyDataChanged: function ($event) {
       this.$emit('update:on', $event.target.checked)
       options.$emit('changed-data')
     }
@@ -62,16 +62,16 @@ Vue.component('measurement-type-options', {
   computed: {
     // Returns a version of type where the first letter is capitalized
     //  @return {string} type but the first letter is capitalized
-    displayType: function(){
-      let name = this.name
+    displayType: function () {
+      const name = this.name
       let displayType = ''
-      let words = name.split('-')
-      
-      for(let word of words){
+      const words = name.split('-')
+
+      for (const word of words) {
         displayType += `${word.charAt(0).toUpperCase()}${word.slice(1)} `
       }
-      
-      return displayType;
+
+      return displayType
     }
   },
   template: `<div class="row">
@@ -118,7 +118,7 @@ Vue.component('measurement-type-options', {
             </div>`
 })
 
-let options = new Vue({
+const options = new Vue({
   el: '#options',
   data: {
     options: {
@@ -266,23 +266,23 @@ let options = new Vue({
   methods: {
     // Saves the option data to local storage and displays a toast saying the data is saved
     _SaveOptions: function () {
-      let setOptions = {
-          measurements: {},
-          general: this.options.general
+      const setOptions = {
+        measurements: {},
+        general: this.options.general
       }
-      
-      let {measurements} = this.options
-      
-      for(key in measurements){
+
+      const { measurements } = this.options
+
+      for (const key in measurements) {
         setOptions.measurements[key] = mapMeasurementTypeUnitsEnable(measurements[key])
       }
-      
+
       localStorage.setItem('ToMetric.Options', JSON.stringify(setOptions))
       M.toast({ html: 'Options Saved' })
     },
-    
+
     // Placeholder so no error is thrown for the update triggered by loadOptions()
-    SaveOptions: function(){
+    SaveOptions: function () {
     },
 
     // Loads saved option data if it exists
@@ -296,7 +296,7 @@ let options = new Vue({
   },
   mounted: function () {
     this.loadOptions()
-    
+
     // Init SaveOptions after the initial load so it's not called for the update triggered by the initial load
     this.$nextTick(function () {
       this.SaveOptions = _.debounce(this._SaveOptions, 500)
@@ -308,7 +308,7 @@ let options = new Vue({
 })
 
 // Notify parent when its data is updated in a child component
-options.$on('changed-data', function(){
+options.$on('changed-data', function () {
   this.SaveOptions()
 })
 
