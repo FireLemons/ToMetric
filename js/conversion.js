@@ -16,16 +16,16 @@ function generateFormula (ratio, imperial, metric) {
 
 const ConversionProblemType = class {
   // @param {number} increment
-  // @param {number} ratio The ratio for unit conversion
+  // @param {number} conversion The ratio pr formula for unit conversion
   // @param {string} imperial The abbreviation for the imperial unit of the conversion
   // @param {string} metric The abbreviation for the metric unit of the conversion
   // @param {function} generateImperial(range) A function to generate imperial values for conversions
   //    @param {number} range A number to limit imperial value generated
   //    @return {number} A value in imperial units for conversion
   // @param {string=} formula(optional) The formula for conversion represented in TeX
-  constructor (ratio, imperial, metric, generateImperial, formula = '') {
-    if (isNaN(ratio)) {
-      throw new TypeError('param ratio must be a number')
+  constructor (conversion, imperial, metric, generateImperial, formula = '') {
+    if (isNaN(conversion) && typeof conversion !== 'function') {
+      throw new TypeError('param conversion must be a number or a function')
     }
 
     if (typeof imperial !== 'string') {
@@ -44,10 +44,10 @@ const ConversionProblemType = class {
       throw new TypeError('param generateImperial must be a function')
     }
 
-    this.ratio = ratio
+    this.conversion = conversion
     this.imperial = imperial
     this.metric = metric
-    this.formula = formula || generateFormula(ratio, imperial, metric)
+    this.formula = formula || generateFormula(conversion, imperial, metric)
     this.generateImperial = generateImperial
   }
 
@@ -58,7 +58,7 @@ const ConversionProblemType = class {
     const imperialMeasurement = this.generateImperial(range)
     return {
       imperial: imperialMeasurement,
-      metric: imperialMeasurement * this.ratio
+      metric: isNaN(this.conversion) ? this.conversion(imperialMeasurement) : imperialMeasurement * this.conversion
     }
   }
 }
@@ -112,7 +112,10 @@ const conversionTypes = {
   }),
   mileskilometers: new ConversionProblemType(1.609, 'mi', 'cm', (range) => {
     return 1 + 1 * Math.ceil(Math.random() * range)
-  })
+  }),
+  fahrenheitcelsius: new ConversionProblemType((imperial) => (imperial - 32) * 5/9, '°F', '°C', (range) => {
+    return -20 + 5 * Math.ceil(Math.random() * range)
+  }, '\\[ (°F - 32) \\times \\frac{5}{9} = °C \\]')
 }
 
 // configure
@@ -203,7 +206,6 @@ const toMetric = new Vue({
       this.userAnswer = ''
 
       const problem = this.getProblem()
-
       this.imperialAbbrev = problem.imperial
       this.metricAbbrev = problem.metric
 
