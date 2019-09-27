@@ -1,3 +1,18 @@
+@keyframes increaseIndicaton {
+  0% {
+      color: white;
+      transform: scale(1.0);
+  }
+  50% {
+      color: yellow;
+      transform: scale(1.5);
+  }
+  100%{
+      color: white;
+      transform: scale(1.0);
+  }
+}
+
 html, body{
     height: 100%;
 }
@@ -10,10 +25,6 @@ input[type=number]::-webkit-outer-spin-button {
 
 span.card-title:hover{
     background-color: #757575 !important;
-}
-
-.flex{
-    display: flex;
 }
 
 #app{
@@ -76,20 +87,26 @@ span.card-title:hover{
     text-align: center;
 }
 
-#display #stats .flex span{
+#display #stats .flex{
     border: 2px solid white;
 }
 
-#display #stats .flex:not(:first-child) span{
-    border-left: 0;
+#display #stats .flex span.increased{
+    animation-name: increaseIndicaton;
+    animation-duration: 750ms;
 }
 
-#display #stats .flex span:first-child{
+#display #stats .flex span.label{
+    border-bottom: 2px solid white;
     font-size: 14pt;
 }
 
-#display #stats .flex span:last-child{
-    border-top: 0;
+#display #stats .flex:not(:first-child){
+    border-left: 0;
+}
+
+#display #stats .flex>*:not(:first-child){
+    display: inline;
     font-size: 24pt;
     padding: 1em 0;
 }

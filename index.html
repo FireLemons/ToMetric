@@ -27,7 +27,7 @@
 					<span class="card-title center-align activator grey darken-2">Show Formula</span>
                     <div id="stats" class="flex">
                         <div class="flex">
-                            <span>
+                            <span class="label">
                                 Level
                             </span>
                             <span>
@@ -35,18 +35,24 @@
                             </span>
                         </div>
                         <div class="flex">
-                            <span>
+                            <span class="label">
                                 Level Progress
                             </span>
-                            <span>
-                                {{ levelUpProgress }}/{{ levelUpQuota }}
-                            </span>
+                            <div>
+                                <span>
+                                    {{ levelUpProgress }}
+                                </span>
+                                /
+                                <span>
+                                    {{ levelUpQuota }}
+                                </span>
+                            </div>
                         </div>
                         <div class="flex">
-                            <span>
+                            <span class="label">
                                 Difficulty
                             </span>
-                            <span>
+                            <span class="increased">
                                 {{ difficulty }}
                             </span>
                         </div>
@@ -60,7 +66,7 @@
 			<div id="conversionInput">
 				<div class="flex">
                     <div class="flex">
-                        <input type="number" class="grey darken-2" v-model="given" readonly>
+                        <input type="text" class="grey darken-2" v-model="given" readonly>
                         <input type="text" :value="imperialAbbrev" disabled>
                     </div>
                     <label> = </label>
