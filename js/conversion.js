@@ -182,6 +182,17 @@ const toMetric = new Vue({
 
     tolerance: 1 / config.general.precision
   },
+  computed: {
+    givenWithoutFloatErrors: function(){
+      let floatCheck = this.given.toString().match(/(^[0-9]+\.[0-9]?)0+/)
+      
+      if(floatCheck){
+        return floatCheck[1]
+      } else {
+        return this.given
+      }
+    }
+  },
   methods: {
     checkAnswer: function () {
       const exactConversion = this.exactConversion
