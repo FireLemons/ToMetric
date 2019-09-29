@@ -43,7 +43,7 @@
                                     {{ levelUpProgress }}
                                 </span>
                                 /
-                                <span>
+                                <span :class="levelUpQuotaIncreased">
                                     {{ levelUpQuota }}
                                 </span>
                             </div>
@@ -52,7 +52,7 @@
                             <span class="label">
                                 Difficulty
                             </span>
-                            <span class="increased">
+                            <span :class="difficultyIncreased">
                                 {{ difficulty }}
                             </span>
                         </div>

@@ -167,7 +167,9 @@ const toMetric = new Vue({
     level: 0,
     levelUpProgress: 0,
     levelUpQuota: 2,
+    levelUpQuotaIncreased: '',
     difficulty: 10,
+    difficultyIncreased: '',
 
     given: 0,
     imperialAbbrev: '',
@@ -213,6 +215,7 @@ const toMetric = new Vue({
       return problems[Math.floor(Math.random() * problems.length)]
     },
     loadNewProblem: function () {
+      //Reset answer box
       this.answerClass = 'grey darken-3'
       this.userAnswer = ''
 
@@ -229,22 +232,28 @@ const toMetric = new Vue({
       renderTeX(problem.formula)
     },
     onCorrect: function (problemStats) {
+      this.levelUpProgress += 1
+        
       if(this.levelUpProgress === this.levelUpQuota){
         this.levelUpProgress = 0
         this.onLevelUp()
-      } else {
-        this.levelUpProgress += 1
       }
       
       this.roundStats.push(problemStats)
     },
     onLevelUp: function(){
+      this.level++
       let roll = Math.random()
+      
+      this.levelUpQuotaIncreased = ''
+      this.difficultyIncreased = ''
       
       if(roll < 0.5){
         this.difficulty += 1
+        this.difficultyIncreased = 'increased'
       } else {
         this.levelUpQuota += 1
+        this.levelUpQuotaIncreased = 'increased'
       }
     }
   },
