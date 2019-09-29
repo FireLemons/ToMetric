@@ -239,14 +239,16 @@ const toMetric = new Vue({
         this.onLevelUp()
       }
       
+      if(this.levelUpProgress === 1){
+        this.levelUpQuotaIncreased = ''
+        this.difficultyIncreased = ''
+      }
+      
       this.roundStats.push(problemStats)
     },
     onLevelUp: function(){
       this.level++
       let roll = Math.random()
-      
-      this.levelUpQuotaIncreased = ''
-      this.difficultyIncreased = ''
       
       if(roll < 0.5){
         this.difficulty += 1
