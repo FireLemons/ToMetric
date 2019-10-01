@@ -63,6 +63,31 @@ const ConversionProblemType = class {
   }
 }
 
+const unreasonableConversionTypes = {
+  incheskilometers: new ConversionProblemType(0.0000254, 'in', 'km', (range) => {
+    range *= 2
+    return 10000 + 5000 * Math.ceil(Math.random() * range)
+  }),
+  feetmillimeters: new ConversionProblemType(304.8, 'ft', 'mm', (range) => {
+    return 1 + 0.1 * Math.ceil(Math.random() * range)
+  }),
+  feetkilometers: new ConversionProblemType(0.0003048, 'ft', 'km', (range) => {
+    return 1000 + 500 * Math.ceil(Math.random() * range)
+  }),
+  yardsmillimeters: new ConversionProblemType(914.4, 'yd', 'mm', (range) => {
+    return 1 + 0.1 * Math.ceil(Math.random() * range)
+  }),
+  yardskilometers: new ConversionProblemType(0.0009144, 'yd', 'km', (range) => {
+    return 100 + 50 * Math.ceil(Math.random() * range)
+  }),
+  milesmillimeters: new ConversionProblemType(1609344, 'mi', 'mm', (range) => {
+    return 1 + 0.1 * Math.ceil(Math.random() * range)
+  }),
+  milescentimeters: new ConversionProblemType(160934.4, 'mi', 'cm', (range) => {
+    return 1 + 0.1 * Math.ceil(Math.random() * range)
+  }),
+}
+
 const conversionTypes = {
   inchesmillimeters: new ConversionProblemType(25.4, 'in', 'mm', (range) => {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
@@ -73,39 +98,17 @@ const conversionTypes = {
   inchesmeters: new ConversionProblemType(0.0254, 'in', 'm', (range) => {
     return 10 + 10 * Math.ceil(Math.random() * range)
   }),
-  incheskilometers: new ConversionProblemType(0.0000254, 'in', 'km', (range) => {
-    range *= 2
-    return 10000 + 5000 * Math.ceil(Math.random() * range)
-  }),
-  feetmillimeters: new ConversionProblemType(304.8, 'ft', 'mm', (range) => {
-    return 1 + 0.1 * Math.ceil(Math.random() * range)
-  }),
   feetcentimeters: new ConversionProblemType(30.48, 'ft', 'cm', (range) => {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
   }),
   feetmeters: new ConversionProblemType(0.3048, 'ft', 'm', (range) => {
     return 1 + 1 * Math.ceil(Math.random() * range)
   }),
-  feetkilometers: new ConversionProblemType(0.0003048, 'ft', 'km', (range) => {
-    return 1000 + 500 * Math.ceil(Math.random() * range)
-  }),
-  yardsmillimeters: new ConversionProblemType(914.4, 'yd', 'mm', (range) => {
-    return 1 + 0.1 * Math.ceil(Math.random() * range)
-  }),
   yardscentimeters: new ConversionProblemType(91.44, 'yd', 'cm', (range) => {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
   }),
   yardsmeters: new ConversionProblemType(0.9144, 'yd', 'm', (range) => {
     return 1 + 1 * Math.ceil(Math.random() * range)
-  }),
-  yardskilometers: new ConversionProblemType(0.0009144, 'yd', 'km', (range) => {
-    return 100 + 50 * Math.ceil(Math.random() * range)
-  }),
-  milesmillimeters: new ConversionProblemType(1609344, 'mi', 'mm', (range) => {
-    return 1 + 0.1 * Math.ceil(Math.random() * range)
-  }),
-  milescentimeters: new ConversionProblemType(160934.4, 'mi', 'cm', (range) => {
-    return 1 + 0.1 * Math.ceil(Math.random() * range)
   }),
   milesmeters: new ConversionProblemType(1609.344, 'mi', 'm', (range) => {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
@@ -141,13 +144,15 @@ function pruneDisabledProblems (measurementType) {
 }
 
 if (config) {
+  if(!config.general.likeConversions){
+    Object.assign(conversionTypes, unreasonableConversionTypes)
+  }
+  
   const measurements = Object.values(config.measurements)
 
   measurements.forEach((measurementType) => {
     pruneDisabledProblems(measurementType)
   })
-} else {
-  // prune the conversions where the magnitudes of the units are too far apart
 }
 
 const problems = Object.values(conversionTypes)
