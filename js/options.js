@@ -259,7 +259,7 @@ const options = new Vue({
       },
       general: {
         likeConversions: true,
-        precision: 10
+        precision: 5
       }
     }
   },
