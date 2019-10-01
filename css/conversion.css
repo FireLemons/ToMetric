@@ -96,6 +96,10 @@ span.card-title:hover{
     animation-duration: 750ms;
 }
 
+#display #stats .flex span{
+    display: inline-block;
+}
+
 #display #stats .flex span.label{
     border-bottom: 2px solid white;
     font-size: 14pt;
