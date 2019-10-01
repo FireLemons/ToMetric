@@ -65,20 +65,19 @@ const ConversionProblemType = class {
 
 const unreasonableConversionTypes = {
   incheskilometers: new ConversionProblemType(0.0000254, 'in', 'km', (range) => {
-    range *= 2
-    return 10000 + 5000 * Math.ceil(Math.random() * range)
+    return 1 + 1 * Math.ceil(Math.random() * range)
   }),
   feetmillimeters: new ConversionProblemType(304.8, 'ft', 'mm', (range) => {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
   }),
   feetkilometers: new ConversionProblemType(0.0003048, 'ft', 'km', (range) => {
-    return 1000 + 500 * Math.ceil(Math.random() * range)
+    return 1 + 1 * Math.ceil(Math.random() * range)
   }),
   yardsmillimeters: new ConversionProblemType(914.4, 'yd', 'mm', (range) => {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
   }),
   yardskilometers: new ConversionProblemType(0.0009144, 'yd', 'km', (range) => {
-    return 100 + 50 * Math.ceil(Math.random() * range)
+    return 1 + 1 * Math.ceil(Math.random() * range)
   }),
   milesmillimeters: new ConversionProblemType(1609344, 'mi', 'mm', (range) => {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
@@ -86,6 +85,13 @@ const unreasonableConversionTypes = {
   milescentimeters: new ConversionProblemType(160934.4, 'mi', 'cm', (range) => {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
   }),
+  
+  ounceskilograms: new ConversionProblemType(0.0283, 'oz', 'kg', (range) => {
+    return 1 + 1 * Math.ceil(Math.random() * range)
+  }),
+  poundsgrams: new ConversionProblemType(453.592, 'lb', 'g', (range) => {
+    return 1 + 0.1 * Math.ceil(Math.random() * range)
+  })
 }
 
 const conversionTypes = {
@@ -116,9 +122,17 @@ const conversionTypes = {
   mileskilometers: new ConversionProblemType(1.609, 'mi', 'cm', (range) => {
     return 1 + 1 * Math.ceil(Math.random() * range)
   }),
+  
   fahrenheitcelsius: new ConversionProblemType((imperial) => (imperial - 32) * 5/9, '°F', '°C', (range) => {
     return -20 + 5 * Math.ceil(Math.random() * range)
-  }, '\\[ (°F - 32) \\times \\frac{5}{9} = °C \\]')
+  }, '\\[ (°F - 32) \\times \\frac{5}{9} = °C \\]'),
+  
+  ouncesgrams: new ConversionProblemType(28.349, 'oz', 'g', (range) => {
+    return 1 + 0.1 * Math.ceil(Math.random() * range)
+  }),
+  poundskilograms: new ConversionProblemType(0.453, 'lb', 'kg', (range) => {
+    return 1 + 1 * Math.ceil(Math.random() * range)
+  })
 }
 
 // configure
