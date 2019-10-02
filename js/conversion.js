@@ -86,10 +86,11 @@ const unreasonableConversionTypes = {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
   }),
   
-  ounceskilograms: new ConversionProblemType(0.0283, 'oz', 'kg', (range) => {
-    return 1 + 1 * Math.ceil(Math.random() * range)
-  }),
   poundsgrams: new ConversionProblemType(453.592, 'lb', 'g', (range) => {
+    return 1 + 0.1 * Math.ceil(Math.random() * range)
+  }),
+  
+  gallonsmilliliter: new ConversionProblemType(3785.41, 'gal', 'mL', (range) => {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
   })
 }
@@ -130,7 +131,20 @@ const conversionTypes = {
   ouncesgrams: new ConversionProblemType(28.349, 'oz', 'g', (range) => {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
   }),
+  ounceskilograms: new ConversionProblemType(0.02834, 'oz', 'kg', (range) => {
+    return 1 + 1 * Math.ceil(Math.random() * range)
+  }),
   poundskilograms: new ConversionProblemType(0.453, 'lb', 'kg', (range) => {
+    return 1 + 1 * Math.ceil(Math.random() * range)
+  }),
+  
+  fluidOuncesmilliliters: new ConversionProblemType(29.57, 'fl oz', 'mL', (range) => {
+    return 1 + 0.1 * Math.ceil(Math.random() * range)
+  }),
+  fluidOuncesliters: new ConversionProblemType(0.02957, 'fl oz', 'L', (range) => {
+    return 1 + 1 * Math.ceil(Math.random() * range)
+  }),
+  gallonsliters: new ConversionProblemType(3.785, 'gal', 'L', (range) => {
     return 1 + 1 * Math.ceil(Math.random() * range)
   })
 }
@@ -143,15 +157,23 @@ const config = JSON.parse(localStorage.getItem('ToMetric.Options'))
 function pruneDisabledProblems (measurementType) {
   const customaryUnits = measurementType.customary
   const metricUnits = measurementType.metric
-
-  for (const customaryUnit in customaryUnits) {
-    const customaryUnitEnabled = customaryUnits[customaryUnit].on
-
-    for (const metricUnit in metricUnits) {
-      const metricUnitEnabled = metricUnits[metricUnit].on
-
-      if (!(customaryUnitEnabled && metricUnitEnabled)) {
+  
+  if(!measurementType.on){
+    for (const customaryUnit in customaryUnits) {
+      for (const metricUnit in metricUnits) {
         delete conversionTypes[customaryUnit + metricUnit]
+      }
+    }
+  } else {
+    for (const customaryUnit in customaryUnits) {
+      const customaryUnitEnabled = customaryUnits[customaryUnit].on
+
+      for (const metricUnit in metricUnits) {
+        const metricUnitEnabled = metricUnits[metricUnit].on
+      
+        if (!(customaryUnitEnabled && metricUnitEnabled)) {
+          delete conversionTypes[customaryUnit + metricUnit]
+        }
       }
     }
   }
