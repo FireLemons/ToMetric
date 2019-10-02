@@ -21,10 +21,47 @@
 		<div id="navBar">
 			<site-nav></site-nav>
 		</div>
-        <noscript>
-            <h4>ToMetric needs javascript to run.</h4>
-        </noscript>
 		<div id="app" class="container">
+            <div id="load-overlay" class="grey darken-3">
+                <noscript>
+                    <style>
+                        #load-content{
+                            display: none;
+                        }
+                    </style>
+                    <h4 class="center-align white-text">ToMetric needs javascript to run.</h4>
+                </noscript>
+                <div id="load-content" class="center-align">
+                    <h2>Loading</h2>
+                    <svg width="200" height="64" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="4" height="64" />
+                        <rect x="8" width="4" height="32"/>
+                        <rect x="16" width="4" height="32"/>
+                        <rect x="24" width="4" height="32"/>
+                        <rect x="32" width="4" height="32"/>
+                        <rect x="40" width="4" height="48"/>
+                        <rect x="48" width="4" height="32"/>
+                        <rect x="56" width="4" height="32"/>
+                        <rect x="64" width="4" height="32"/>
+                        <rect x="72" width="4" height="32"/>
+                        <rect x="80" width="4" height="64"/>
+                        <rect x="88" width="4" height="32"/>
+                        <rect x="96" width="4" height="32"/>
+                        <rect x="104" width="4" height="32"/>
+                        <rect x="112" width="4" height="32"/>
+                        <rect x="120" width="4" height="48"/>
+                        <rect x="128" width="4" height="32"/>
+                        <rect x="136" width="4" height="32"/>
+                        <rect x="144" width="4" height="32"/>
+                        <rect x="152" width="4" height="32"/>
+                        <rect x="160" width="4" height="64" />
+                        <rect x="168" width="4" height="32"/>
+                        <rect x="176" width="4" height="32"/>
+                        <rect x="184" width="4" height="32"/>
+                        <rect x="192" width="4" height="32"/>
+                    </svg>
+                </div>
+            </div>
 			<div id="display" class="card grey darken-3">
 				<div class="card-content">
 					<span class="card-title center-align activator grey darken-2">Show Formula</span>
@@ -79,7 +116,17 @@
                     </div>
 				</div>
 			</div>
+            <!-- Round Stats Modal -->
+            <div id="round-stats" class="modal modal-fixed-footer">
+                <div class="modal-content grey darken-3">
+                    <h4 class="center-align white-text">Round Stats</h4>
+                </div>
+                <div class="modal-footer grey darken-3">
+                    <a href="#!" class="modal-close btn-flat white-text">Next</a>
+                </div>
+            </div>
 		</div>
+        
 		<script src="js/nav.js"></script>
 		<script src="js/conversion.js"></script>
 	</body>

@@ -206,7 +206,6 @@ if (config) {
 
 const problems = Object.values(conversionTypes)
 
-// Init mathjax tools
 // Renders TeX code in the formula div
 function renderTeX (TeX) {
   MathJax.Hub.Queue(
@@ -314,6 +313,12 @@ const toMetric = new Vue({
     }
   },
   mounted: function () {
+    // Init materialize modals
+    M.Modal.init(document.querySelectorAll('.modal'));
+    let roundStats = M.Modal.getInstance(document.getElementById('round-stats'));
+
+    //roundStats.open()
+    
     this.loadNewProblem()
   }
 })

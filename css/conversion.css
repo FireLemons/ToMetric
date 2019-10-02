@@ -13,6 +13,18 @@
   }
 }
 
+@keyframes whitenBar {
+    90% {
+        fill: #bdbdbd
+    }
+    95%{
+        fill: white
+    }
+    100% {
+        fill: #bdbdbd
+    }
+}
+
 html, body{
     height: 100%;
 }
@@ -21,11 +33,6 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none; 
     margin: 0; 
-}
-
-noscript h4 {
-    color: white;
-    text-align: center;
 }
 
 span.card-title:hover{
@@ -122,6 +129,120 @@ span.card-title:hover{
 
 #formula{
     margin: 2.5em 0
+}
+
+#load-content{
+    margin-top: 40vh
+}
+
+#load-content svg rect{
+    fill: #bdbdbd;
+    animation-name: whitenBar;
+    animation-duration: 1250ms;
+    animation-iteration-count: infinite;
+}
+
+#load-content svg rect:nth-child(1){
+    animation-delay: -1200ms;
+}
+
+#load-content svg rect:nth-child(2){
+    animation-delay: -1150ms;
+}
+
+#load-content svg rect:nth-child(3){
+    animation-delay: -1100ms;
+}
+
+#load-content svg rect:nth-child(4){
+    animation-delay: -1050ms;
+}
+
+#load-content svg rect:nth-child(5){
+    animation-delay: -1000ms;
+}
+
+#load-content svg rect:nth-child(6){
+    animation-delay: -950ms;
+}
+
+#load-content svg rect:nth-child(7){
+    animation-delay: -900ms;
+}
+
+#load-content svg rect:nth-child(8){
+    animation-delay: -850ms;
+}
+
+#load-content svg rect:nth-child(9){
+    animation-delay: -800ms;
+}
+
+#load-content svg rect:nth-child(10){
+    animation-delay: -750ms;
+}
+
+#load-content svg rect:nth-child(11){
+    animation-delay: -700ms;
+}
+
+#load-content svg rect:nth-child(12){
+    animation-delay: -650ms;
+}
+
+#load-content svg rect:nth-child(13){
+    animation-delay: -600ms;
+}
+
+#load-content svg rect:nth-child(14){
+    animation-delay: -550ms;
+}
+
+#load-content svg rect:nth-child(15){
+    animation-delay: -500ms;
+}
+
+#load-content svg rect:nth-child(16){
+    animation-delay: -450ms;
+}
+
+#load-content svg rect:nth-child(17){
+    animation-delay: -400ms;
+}
+
+#load-content svg rect:nth-child(18){
+    animation-delay: -350ms;
+}
+
+#load-content svg rect:nth-child(19){
+    animation-delay: -300ms;
+}
+
+#load-content svg rect:nth-child(20){
+    animation-delay: -250ms;
+}
+
+#load-content svg rect:nth-child(21){
+    animation-delay: -200ms;
+}
+
+#load-content svg rect:nth-child(22){
+    animation-delay: -150ms;
+}
+
+#load-content svg rect:nth-child(23){
+    animation-delay: -100ms;
+}
+
+#load-content svg rect:nth-child(24){
+    animation-delay: -50ms;
+}
+
+#load-overlay{
+    height: 100%; width: 100%;
+    left: 0; top: 0;
+    position: fixed;
+    z-index: 2
 }
 
 @media screen and (max-aspect-ratio: 8/7){
