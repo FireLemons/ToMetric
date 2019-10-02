@@ -114,3 +114,8 @@ span.card-title:hover{
     font-size: 24pt;
     padding: 1em 0;
 }
+@media screen and (max-aspect-ratio: 8/7){
+    #conversionInput input{
+        font-size: 14pt;
+    }
+}
