@@ -236,7 +236,7 @@ const toMetric = new Vue({
     
     roundStats: [],
 
-    tolerance: 1 / config.general.precision
+    tolerance: config ? 1 / config.general.precision : 1 / 5
   },
   computed: {
     givenWithoutFloatErrors: function(){
