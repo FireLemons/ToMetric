@@ -90,6 +90,10 @@ const unreasonableConversionTypes = {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
   }),
   
+  
+  quartsmilliliters: new ConversionProblemType(946.3, 'qt', 'mL', (range) => {
+    return 1 + 0.1 * Math.ceil(Math.random() * range)
+  }),
   gallonsmilliliter: new ConversionProblemType(3785.41, 'gal', 'mL', (range) => {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
   })
@@ -142,6 +146,15 @@ const conversionTypes = {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
   }),
   fluidOuncesliters: new ConversionProblemType(0.02957, 'fl oz', 'L', (range) => {
+    return 1 + 1 * Math.ceil(Math.random() * range)
+  }),
+  pintsmilliliters: new ConversionProblemType(473.2, 'pt', 'mL', (range) => {
+    return 1 + 0.1 * Math.ceil(Math.random() * range)
+  }),
+  pintsliters: new ConversionProblemType(0.4732, 'pt', 'L', (range) => {
+    return 1 + 1 * Math.ceil(Math.random() * range)
+  }),
+  quartsliters: new ConversionProblemType(0.9463, 'qt', 'L', (range) => {
     return 1 + 1 * Math.ceil(Math.random() * range)
   }),
   gallonsliters: new ConversionProblemType(3.785, 'gal', 'L', (range) => {
