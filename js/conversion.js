@@ -168,7 +168,7 @@ const metricFacts = [
   'Astronauts on the International Space Station have 2 sets of tools for metric and customary units because the American portion has been built in customary units and the rest in metric.',
   'Joseph Dombey, a french botanist, was sent to the US to help with metrication. On his way across the Atlantic he was captured by privateers and held captive in Montserrat where he died.',
   'Interstate 19 in Arizona is the only freeway in America that uses the metric system.',
-  'The Mars Climate Orbiter was lost in space during a maneuver near the martian atmosphere. The failure was caused by one piece of software producing output in customary units being fed into another piece expecting metric units.',
+  'The Mars Climate Orbiter was lost in space during a maneuver near the martian atmosphere. The failure was caused by one piece of software feeding customary unit output into another piece expecting metric units.',
   'The Gimli Glider was a Boeing 747 that ran out of fuel mid flight. During refueling, the crew used the wrong conversion factor to figure the mass of fuel needed. The conversion factor was for pounds instead of kilograms.'
 ]
 
