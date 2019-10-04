@@ -39,6 +39,14 @@ span.card-title:hover{
     background-color: #757575 !important;
 }
 
+.fade-enter-active, .fade-leave-active{
+    transition: opacity 1s;
+}
+
+.fade-enter, .fade-leave-to{
+  opacity: 0;
+}
+
 #app{
     color: white;
     margin-top: 8em;
@@ -138,104 +146,108 @@ span.card-title:hover{
 #load-content svg rect{
     fill: #bdbdbd;
     animation-name: whitenBar;
-    animation-duration: 1250ms;
+    animation-duration: 650ms;
     animation-iteration-count: infinite;
 }
 
 #load-content svg rect:nth-child(1){
-    animation-delay: -1200ms;
+    animation-delay: -625ms;
 }
 
 #load-content svg rect:nth-child(2){
-    animation-delay: -1150ms;
-}
-
-#load-content svg rect:nth-child(3){
-    animation-delay: -1100ms;
-}
-
-#load-content svg rect:nth-child(4){
-    animation-delay: -1050ms;
-}
-
-#load-content svg rect:nth-child(5){
-    animation-delay: -1000ms;
-}
-
-#load-content svg rect:nth-child(6){
-    animation-delay: -950ms;
-}
-
-#load-content svg rect:nth-child(7){
-    animation-delay: -900ms;
-}
-
-#load-content svg rect:nth-child(8){
-    animation-delay: -850ms;
-}
-
-#load-content svg rect:nth-child(9){
-    animation-delay: -800ms;
-}
-
-#load-content svg rect:nth-child(10){
-    animation-delay: -750ms;
-}
-
-#load-content svg rect:nth-child(11){
-    animation-delay: -700ms;
-}
-
-#load-content svg rect:nth-child(12){
-    animation-delay: -650ms;
-}
-
-#load-content svg rect:nth-child(13){
     animation-delay: -600ms;
 }
 
-#load-content svg rect:nth-child(14){
+#load-content svg rect:nth-child(3){
+    animation-delay: -575ms;
+}
+
+#load-content svg rect:nth-child(4){
     animation-delay: -550ms;
 }
 
-#load-content svg rect:nth-child(15){
+#load-content svg rect:nth-child(5){
+    animation-delay: -525ms;
+}
+
+#load-content svg rect:nth-child(6){
     animation-delay: -500ms;
 }
 
-#load-content svg rect:nth-child(16){
+#load-content svg rect:nth-child(7){
+    animation-delay: -475ms;
+}
+
+#load-content svg rect:nth-child(8){
     animation-delay: -450ms;
 }
 
-#load-content svg rect:nth-child(17){
+#load-content svg rect:nth-child(9){
+    animation-delay: -425ms;
+}
+
+#load-content svg rect:nth-child(10){
     animation-delay: -400ms;
 }
 
-#load-content svg rect:nth-child(18){
+#load-content svg rect:nth-child(11){
+    animation-delay: -375ms;
+}
+
+#load-content svg rect:nth-child(12){
     animation-delay: -350ms;
 }
 
-#load-content svg rect:nth-child(19){
+#load-content svg rect:nth-child(13){
+    animation-delay: -325ms;
+}
+
+#load-content svg rect:nth-child(14){
     animation-delay: -300ms;
 }
 
-#load-content svg rect:nth-child(20){
+#load-content svg rect:nth-child(15){
+    animation-delay: -275ms;
+}
+
+#load-content svg rect:nth-child(16){
     animation-delay: -250ms;
 }
 
-#load-content svg rect:nth-child(21){
+#load-content svg rect:nth-child(17){
+    animation-delay: -225ms;
+}
+
+#load-content svg rect:nth-child(18){
     animation-delay: -200ms;
 }
 
-#load-content svg rect:nth-child(22){
+#load-content svg rect:nth-child(19){
+    animation-delay: -175ms;
+}
+
+#load-content svg rect:nth-child(20){
     animation-delay: -150ms;
 }
 
-#load-content svg rect:nth-child(23){
+#load-content svg rect:nth-child(21){
+    animation-delay: -125ms;
+}
+
+#load-content svg rect:nth-child(22){
     animation-delay: -100ms;
+}
+
+#load-content svg rect:nth-child(23){
+    animation-delay: -75ms;
 }
 
 #load-content svg rect:nth-child(24){
     animation-delay: -50ms;
+}
+
+#load-content svg rect:nth-child(25){
+    animation-delay: -25ms;
 }
 
 #load-overlay{
@@ -243,6 +255,21 @@ span.card-title:hover{
     left: 0; top: 0;
     position: fixed;
     z-index: 2
+}
+
+#metric-fact{
+    cursor: default;
+    margin: 8em;
+    text-align: center;
+}
+
+#metric-fact p:first-child{
+    font-size: 24pt;
+}
+
+#metric-fact p:last-child{
+    font-style: italic;
+    font-size: 14pt;
 }
 
 @media screen and (max-aspect-ratio: 8/7){
