@@ -159,6 +159,9 @@ const conversionTypes = {
   }),
   gallonsliters: new ConversionProblemType(3.785, 'gal', 'L', (range) => {
     return 1 + 1 * Math.ceil(Math.random() * range)
+  }),
+  milesPerHourkilometersPerHour: new ConversionProblemType(1.609, 'mph', 'kph', (range) => {
+    return 1 + 1 * Math.ceil(Math.random() * range)
   })
 }
 
