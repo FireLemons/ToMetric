@@ -167,12 +167,12 @@ const conversionTypes = {
 
 const metricFacts = [
   'The yard is defined as 0.9144 meters. The meter is defined as the length of the path travelled by light in a vacuum in 1/299792458 of a second.',
-  'The Metric Conversion Act of 1975 declared the metric system as "the preferred system of weights and measures for United States trade and commerce", but permitted the use of United States customary units in all activities.',
-  'Astronauts on the International Space Station have 2 sets of tools for metric and customary units because the American portion has been built in customary units and the rest in metric.',
-  'Joseph Dombey, a french botanist, was sent to the US to help with metrication. On his way across the Atlantic he was captured by privateers and held captive in Montserrat where he died.',
+  'The Metric Conversion Act declared the metric system as "the preferred system of weights and measures for United States trade and commerce", but allowed the use of United States customary units.',
+  'Astronauts on the ISS have sets of tools for metric and customary units because only the American portion has been built in customary units.',
+  'Joseph Dombey was sent to the US to help with metrication. On his way across the Atlantic he was captured by privateers and held captive in Montserrat where he died.',
   'Interstate 19 in Arizona is the only freeway in America that uses the metric system.',
-  'The Mars Climate Orbiter was lost in space during a maneuver near the martian atmosphere. The failure was caused by one piece of software feeding customary unit output into another piece expecting metric units.',
-  'The Gimli Glider was a Boeing 747 that ran out of fuel mid flight. During refueling, the crew used the wrong conversion factor to figure the mass of fuel needed. The conversion factor was for pounds instead of kilograms.'
+  'The Mars Climate Orbiter was lost in space because some of its software was feeding customary unit output into another piece expecting metric units.',
+  'The Gimli Glider was a Boeing 747 that ran out of fuel mid flight. During refueling, the crew used a conversion factor for pounds instead of the correct one for kilograms.'
 ]
 
 // configure
