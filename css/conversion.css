@@ -261,6 +261,14 @@ span.card-title:hover{
     z-index: 2
 }
 
+#round-stats table, #round-stats th, #round-stats td {
+    border: 3px solid #eee;
+}
+
+#round-stats th {
+    background: #333;
+}
+
 #metric-fact{
     cursor: default;
     margin: 8em;
