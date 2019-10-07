@@ -206,12 +206,15 @@ function pruneDisabledProblems (measurementType) {
 }
 
 if (config) {
+  // If abnormal conversions are enabled
   if(!config.general.likeConversions){
+    // Add strange conversions to the problem pool
     Object.assign(conversionTypes, unreasonableConversionTypes)
   }
   
   const measurements = Object.values(config.measurements)
 
+  // Remove disabled measurements
   measurements.forEach((measurementType) => {
     pruneDisabledProblems(measurementType)
   })
@@ -245,6 +248,7 @@ const toMetric = new Vue({
     imperialAbbrev: '',
     answerClass: 'grey darken-3',
     userAnswer: '',
+    tries: 1,
     exactConversion: 0,
     metricAbbrev: '',
 
@@ -255,6 +259,7 @@ const toMetric = new Vue({
     tolerance: config ? 1 / config.general.precision : 1 / 5
   },
   computed: {
+    // Makes it so float errors don't produce a very long string in the given imperial measurement box
     givenWithoutFloatErrors: function(){
       let floatCheck = this.given.toString().match(/(^[0-9]+\.[0-9]?)0+/)
       
@@ -266,26 +271,33 @@ const toMetric = new Vue({
     }
   },
   methods: {
+    // Checks if the user conversion was close enough
     checkAnswer: function () {
       const exactConversion = this.exactConversion
       let percentError = Math.abs(exactConversion - this.userAnswer) / exactConversion
 
-      if (percentError <= this.tolerance) {
+      if (percentError <= this.tolerance) {// Acceptable answer
         this.onCorrect({
           errorPercent: percentError,
           errorAmount: Math.abs(this.userAnswer - exactConversion),
-          exactConversion: exactConversion
+          exactConversion: exactConversion,
+          tries: this.tries
         })
+        
+        this.tries = 1
         this.loadNewProblem()
-      } else {
+      } else {// Answer not accurate enough
         this.answerClass = 'grey darken-3 wrong'
+        this.tries++
       }
     },
+    // Gets a random problem object
+    //  @return {ConversionProblemType} a random problem type from the problem pool
     getProblem: function () {
       return problems[Math.floor(Math.random() * problems.length)]
     },
     loadNewProblem: function () {
-      //Reset answer box
+      // Reset answer box
       this.answerClass = 'grey darken-3'
       this.userAnswer = ''
 
@@ -306,7 +318,7 @@ const toMetric = new Vue({
         
       if(this.levelUpProgress === this.levelUpQuota){
         this.levelUpProgress = 0
-        this.onLevelUp()
+        this.showStats()
       }
       
       if(this.levelUpProgress === 1){
@@ -327,14 +339,18 @@ const toMetric = new Vue({
         this.levelUpQuota += 1
         this.levelUpQuotaIncreased = 'increased'
       }
+      
+      this.roundStats = []
+    },
+    showStats: function(){
+      this.roundStatsModal.open()
     }
   },
   mounted: function () {
     // Init materialize modals
     M.Modal.init(document.querySelectorAll('.modal'));
-    let roundStats = M.Modal.getInstance(document.getElementById('round-stats'));
+    this.roundStatsModal = M.Modal.getInstance(document.getElementById('round-stats'));
 
-    //roundStats.open()
     MathJax.Hub.Register.StartupHook("End",() => {
       this.loaded = true
       this.metricFact = `<p>${metricFacts[Math.floor(Math.random() * metricFacts.length)]}</p><p class="grey-text text-lighten-2">Click anywhere to continue</p>`
