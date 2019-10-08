@@ -167,12 +167,20 @@ const conversionTypes = {
 
 const metricFacts = [
   'The yard is defined as 0.9144 meters. The meter is defined as the length of the path travelled by light in a vacuum in 1/299792458 of a second.',
-  'The Metric Conversion Act declared the metric system as "the preferred system of weights and measures for United States trade and commerce", but allowed the use of United States customary units.',
+  'The Metric Conversion Act declared the metric system as "the preferred system of weights and measures for United States trade and commerce", but still allowed the use of customary units.',
   'Astronauts on the ISS have sets of tools for metric and customary units because only the American portion has been built in customary units.',
   'Joseph Dombey was sent to the US to help with metrication. On his way across the Atlantic he was captured by privateers and held captive in Montserrat where he died.',
   'Interstate 19 in Arizona is the only freeway in America that uses the metric system.',
   'The Mars Climate Orbiter was lost in space because some of its software was feeding customary unit output into another piece expecting metric units.',
-  'The Gimli Glider was a Boeing 747 that ran out of fuel mid flight. During refueling, the crew used a conversion factor for pounds instead of the correct one for kilograms.'
+  'The Gimli Glider was a Boeing 747 that ran out of fuel mid flight. During refueling, the crew used a conversion factor for pounds instead of the correct one for kilograms.',
+  'A mile is about 1600 meters',
+  'A fluid ounce is about 3 hundredths of a liter',
+  'An inch is about 25 millimeters',
+  'A quart is about 9 tenths of a liter',
+  'An ounce is about 28 grams',
+  'A fluid ounce is about 30 milliliters',
+  'A pint is about half a liter',
+  'An inch is about 2 and a half centimeters'
 ]
 
 // configure
@@ -256,7 +264,7 @@ const toMetric = new Vue({
     
     roundStats: [],
 
-    tolerance: config ? 1 / config.general.precision : 1 / 5
+    tolerance: config ? config.general.precision / 100 : 1 / 20
   },
   computed: {
     // Makes it so float errors don't produce a very long string in the given imperial measurement box
@@ -278,9 +286,10 @@ const toMetric = new Vue({
 
       if (percentError <= this.tolerance) {// Acceptable answer
         this.onCorrect({
-          errorPercent: percentError,
+          errorPercent: percentError * 100,
           errorAmount: Math.abs(this.userAnswer - exactConversion),
           exactConversion: exactConversion,
+          given: this.givenWithoutFloatErrors,
           tries: this.tries
         })
         

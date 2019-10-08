@@ -130,17 +130,19 @@
                     <table class="centered">
                         <thead>
                             <tr>
-                                <th>% Error</th>
-                                <th>Error Amount</th>
+                                <th>Customary Unit</th>
                                 <th>Exact Answer</th>
+                                <th>Error Amount</th>
+                                <th>% Error</th>
                                 <th># Tries</th>
                             </tr>
                         </thead>
                         <tbody>
                           <tr v-for="problemStats in roundStats">
-                            <td>{{problemStats.errorPercent}}</td>
-                            <td>{{problemStats.errorAmount}}</td>
+                            <td>{{problemStats.given}}</td>
                             <td>{{problemStats.exactConversion}}</td>
+                            <td>{{problemStats.errorAmount}}</td>
+                            <td>{{problemStats.errorPercent}}</td>
                             <td>{{problemStats.tries}}</td>
                           </tr>
                         </tbody>
