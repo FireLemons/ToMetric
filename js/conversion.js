@@ -14,6 +14,13 @@ function generateFormula (ratio, imperial, metric) {
   return `\\[ 1\\,\\mathrm{${imperial}} = ${coefficientMagnitude[1]}\\,\\mathrm{${metric}}` + (coefficientMagnitude[2] === '0' ? '' : `\\times 10^{${coefficientMagnitude[2]}}`) + '\\]'
 }
 
+// Corrected javascript round function
+//  @param  {number} x The number to be rounded
+//  @return {number} x rounded down if its decimal component is at most .5 otherwise x rounded up
+function round(x){
+  return (x % 1 <= .5) ? Math.floor(x) : Math.floor(x) + 1
+}
+
 const ConversionProblemType = class {
   // @param {number} increment
   // @param {number} conversion The ratio pr formula for unit conversion
@@ -174,13 +181,14 @@ const metricFacts = [
   'The Mars Climate Orbiter was lost in space because some of its software was feeding customary unit output into another piece expecting metric units.',
   'The Gimli Glider was a Boeing 747 that ran out of fuel mid flight. During refueling, the crew used a conversion factor for pounds instead of the correct one for kilograms.',
   'A mile is about 1600 meters',
+  'A fluid ounce is about 30 milliliters',
   'A fluid ounce is about 3 hundredths of a liter',
   'An inch is about 25 millimeters',
   'A quart is about 9 tenths of a liter',
   'An ounce is about 28 grams',
-  'A fluid ounce is about 30 milliliters',
   'A pint is about half a liter',
-  'An inch is about 2 and a half centimeters'
+  'An inch is about 2 and a half centimeters',
+  'A foot is about 3 tenths of a meter'
 ]
 
 // configure
@@ -264,7 +272,7 @@ const toMetric = new Vue({
     
     roundStats: [],
 
-    tolerance: config ? config.general.precision / 100 : 1 / 20
+    tolerance: config ? config.general.precision : 5
   },
   computed: {
     // Makes it so float errors don't produce a very long string in the given imperial measurement box
@@ -282,11 +290,11 @@ const toMetric = new Vue({
     // Checks if the user conversion was close enough
     checkAnswer: function () {
       const exactConversion = this.exactConversion
-      let percentError = Math.abs(exactConversion - this.userAnswer) / exactConversion
+      let percentError = Math.abs(exactConversion - this.userAnswer) * 100 / exactConversion
 
       if (percentError <= this.tolerance) {// Acceptable answer
         this.onCorrect({
-          errorPercent: percentError * 100,
+          errorPercent: round(percentError) ? round(percentError) : '< 0',
           errorAmount: Math.abs(this.userAnswer - exactConversion),
           exactConversion: exactConversion,
           given: this.givenWithoutFloatErrors,
