@@ -114,7 +114,7 @@ const conversionTypes = {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
   }),
   inchesmeters: new ConversionProblemType(0.0254, 'in', 'm', (range) => {
-    return 10 + 10 * Math.ceil(Math.random() * range)
+    return 1 + 1 * Math.ceil(Math.random() * range)
   }),
   feetcentimeters: new ConversionProblemType(30.48, 'ft', 'cm', (range) => {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
@@ -131,7 +131,7 @@ const conversionTypes = {
   milesmeters: new ConversionProblemType(1609.344, 'mi', 'm', (range) => {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
   }),
-  mileskilometers: new ConversionProblemType(1.609, 'mi', 'cm', (range) => {
+  mileskilometers: new ConversionProblemType(1.609, 'mi', 'km', (range) => {
     return 1 + 1 * Math.ceil(Math.random() * range)
   }),
   
@@ -180,15 +180,17 @@ const metricFacts = [
   'Interstate 19 in Arizona is the only freeway in America that uses the metric system.',
   'The Mars Climate Orbiter was lost in space because some of its software was feeding customary unit output into another piece expecting metric units.',
   'The Gimli Glider was a Boeing 747 that ran out of fuel mid flight. During refueling, the crew used a conversion factor for pounds instead of the correct one for kilograms.',
+  'An inch is about 25 millimeters',
+  'An inch is about 2.5 centimeters',
+  'A foot is about 3 tenths of a meter',
   'A mile is about 1600 meters',
+  'A mile is about 1.6 kilometers',
+  'An ounce is about 28 grams',
   'A fluid ounce is about 30 milliliters',
   'A fluid ounce is about 3 hundredths of a liter',
-  'An inch is about 25 millimeters',
-  'A quart is about 9 tenths of a liter',
-  'An ounce is about 28 grams',
   'A pint is about half a liter',
-  'An inch is about 2 and a half centimeters',
-  'A foot is about 3 tenths of a meter'
+  'A quart is about 9 tenths of a liter',
+  'A gallon is about 3.8 liters'
 ]
 
 // configure
@@ -257,7 +259,7 @@ const toMetric = new Vue({
     levelUpProgress: 0,
     levelUpQuota: 2,
     levelUpQuotaIncreased: '',
-    difficulty: 10,
+    difficulty: 5,
     difficultyIncreased: '',
 
     given: 0,
@@ -296,8 +298,8 @@ const toMetric = new Vue({
         this.onCorrect({
           errorPercent: round(percentError) ? round(percentError) : '< 0',
           errorAmount: Math.abs(this.userAnswer - exactConversion),
-          exactConversion: exactConversion,
-          given: this.givenWithoutFloatErrors,
+        exactConversion: `${exactConversion} (${this.metricAbbrev})`,
+          given: `${this.givenWithoutFloatErrors} (${this.imperialAbbrev})`,
           tries: this.tries
         })
         
