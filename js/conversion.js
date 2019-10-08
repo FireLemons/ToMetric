@@ -367,7 +367,12 @@ const toMetric = new Vue({
   },
   mounted: function () {
     // Init materialize modals
-    M.Modal.init(document.querySelectorAll('.modal'));
+    M.Modal.init(document.querySelectorAll('.modal'), {
+      onCloseEnd: () => {
+        this.onLevelUp()
+      }
+    })
+    
     this.roundStatsModal = M.Modal.getInstance(document.getElementById('round-stats'));
 
     MathJax.Hub.Register.StartupHook("End",() => {
