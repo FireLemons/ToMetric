@@ -259,9 +259,7 @@ const toMetric = new Vue({
     level: 0,
     levelUpProgress: 0,
     levelUpQuota: 2,
-    levelUpQuotaIncreased: '',
     difficulty: 5,
-    difficultyIncreased: '',
 
     given: 0,
     imperialAbbrev: '',
@@ -342,11 +340,6 @@ const toMetric = new Vue({
         this.showStats()
       }
       
-      if(this.levelUpProgress === 1){
-        this.levelUpQuotaIncreased = ''
-        this.difficultyIncreased = ''
-      }
-      
       this.roundStats.push(problemStats)
     },
     onLevelUp: function(){
@@ -355,10 +348,8 @@ const toMetric = new Vue({
       
       if(roll < 0.5){
         this.difficulty += 1
-        this.difficultyIncreased = 'increased'
       } else {
         this.levelUpQuota += 1
-        this.levelUpQuotaIncreased = 'increased'
       }
       
       this.roundStats = []

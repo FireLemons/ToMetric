@@ -70,6 +70,11 @@ span.card-title:hover{
   animation: flash 4s;
 }
 
+.increase-indication-enter-active{
+    animation-name: increaseIndicaton;
+    animation-duration: 750ms;
+}
+
 #app{
     color: white;
     margin-top: 8em;
@@ -153,11 +158,6 @@ span.card-title:hover{
 
 #display #stats .flex{
     border: 2px solid white;
-}
-
-#display #stats .flex span.increased{
-    animation-name: increaseIndicaton;
-    animation-duration: 750ms;
 }
 
 #display #stats .flex span{

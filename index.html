@@ -85,22 +85,28 @@
                                 Level Progress
                             </span>
                             <div>
-                                <span>
-                                    {{ levelUpProgress }}
-                                </span>
+                                <transition name="increase-indication" mode="out-in">
+                                    <span :key="levelUpProgress">
+                                        {{ levelUpProgress }}
+                                    </span>
+                                </transition>
                                 /
-                                <span :class="levelUpQuotaIncreased">
-                                    {{ levelUpQuota }}
-                                </span>
+                                <transition name="increase-indication" mode="out-in">
+                                    <span :key="levelUpQuota">
+                                        {{ levelUpQuota }}
+                                    </span>
+                                </transition>
                             </div>
                         </div>
                         <div class="flex">
                             <span class="label">
                                 Difficulty
                             </span>
-                            <span :class="difficultyIncreased">
-                                {{ difficulty }}
-                            </span>
+                            <transition name="increase-indication" mode="out-in">
+                                <span :key="difficulty">
+                                    {{ difficulty }}
+                                </span>
+                            </transition>
                         </div>
                     </div>
                     <a class="btn-large center-align grey darken-2" @click="showFormula=true">Show Formula</a>
