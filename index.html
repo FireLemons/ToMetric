@@ -69,9 +69,8 @@
                     </transition>
                 </div>
             </transition>
-			<div id="display" class="card grey darken-3">
-				<div class="card-content">
-					<span class="card-title center-align activator grey darken-2">Show Formula</span>
+			<div id="display" class="grey darken-3">
+				<div>
                     <div id="stats" class="flex">
                         <div class="flex">
                             <span class="label">
@@ -104,11 +103,11 @@
                             </span>
                         </div>
                     </div>
+                    <a class="btn-large center-align grey darken-2" @click="showFormula=true">Show Formula</a>
 				</div>
-				<div class="card-reveal grey darken-3">
-					<span class="card-title center-align grey darken-2">Back to stats</span>
-					<div id="formula"><!--Math formulas rendered here--></div>
-				</div>
+                <transition name="flash" v-on:after-enter="showFormula=false">
+                    <div id="formula" class="grey darken-3" v-show="showFormula"><!--Math formulas rendered here--></div>
+                </transition>
 			</div>
 			<div id="conversionInput">
 				<div class="flex">

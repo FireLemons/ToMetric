@@ -186,6 +186,7 @@ const metricFacts = [
   'A mile is about 1600 meters',
   'A mile is about 1.6 kilometers',
   'An ounce is about 28 grams',
+  'An ounce is about 3 hundredths of a kilogram',
   'A fluid ounce is about 30 milliliters',
   'A fluid ounce is about 3 hundredths of a liter',
   'A pint is about half a liter',
@@ -271,6 +272,7 @@ const toMetric = new Vue({
     metricAbbrev: '',
 
     formula: '',
+    showFormula: false,
     
     roundStats: [],
 

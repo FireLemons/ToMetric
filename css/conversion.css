@@ -25,6 +25,21 @@
     }
 }
 
+@keyframes flash {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 html, body{
     height: 100%;
 }
@@ -47,8 +62,12 @@ span.card-title:hover{
     transition: opacity 1s;
 }
 
-.fade-enter, .fade-leave-to{
+.fade-enter, .fade-leave-to, .flash-enter, .flash-enter-to, .flash-leave{
   opacity: 0;
+}
+
+.flash-enter-active {
+  animation: flash 4s;
 }
 
 #app{
@@ -90,7 +109,16 @@ span.card-title:hover{
 }
 
 #display{
-    height: 16em;
+    margin: 1em 0;
+    position: relative;
+}
+
+#display .btn-large{
+    width: 100%
+}
+
+#display .btn-large:hover{
+    background-color: #757575 !important;
 }
 
 #display .card-title{
@@ -101,8 +129,20 @@ span.card-title:hover{
     line-height: 1.5;
 }
 
+#display #formula{
+    height: 100%; width: 100%;
+    padding: 2.5em 0;
+    
+    position: absolute;
+    left: 0;
+    top: 0;
+    
+    z-index: 0;
+}
+
 #display #stats{
     cursor: default;
+    padding: 1em;
 }
 
 #display #stats .flex{
@@ -137,10 +177,6 @@ span.card-title:hover{
     display: inline;
     font-size: 24pt;
     padding: 1em 0;
-}
-
-#formula{
-    margin: 2.5em 0
 }
 
 #load-content{
