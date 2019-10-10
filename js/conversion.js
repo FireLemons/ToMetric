@@ -327,8 +327,8 @@ const toMetric = new Vue({
       if (percentError <= this.tolerance) {// Acceptable answer
         this.onCorrect({
           errorPercent: round(percentError) ? round(percentError) : '< 0',
-          errorAmount: Math.abs(this.userAnswer - exactConversion),
-        exactConversion: `${exactConversion} (${this.metricAbbrev})`,
+          errorAmount: `${fixRepeat(Math.abs(this.userAnswer - exactConversion))} (${this.metricAbbrev})`,
+          exactConversion: `${fixRepeat(exactConversion)} (${this.metricAbbrev})`,
           given: `${this.givenWithoutFloatErrors} (${this.imperialAbbrev})`,
           tries: this.tries
         })
