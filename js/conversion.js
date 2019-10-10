@@ -21,6 +21,36 @@ function round(x){
   return (x % 1 <= .5) ? Math.floor(x) : Math.floor(x) + 1
 }
 
+// Shortens numbers with repeating decimals
+//  @param  {number} x The number to be shortened if necessary 
+//  @return {number} A shortened version of x if x trailed in a repeating decimal otherwise just x 
+function fixRepeat(x){
+  let matchRepeat = x.toString().match(/^([0-9.\-]+?)(0{3,}|3{3,}|6{3,}|9{3,})/)
+  
+  if(matchRepeat){
+    let xTruncated = matchRepeat[1]
+      
+    switch(matchRepeat[2].charAt(1)){
+      case '3':
+        return xTruncated + '33'
+      case '6':
+        return xTruncated + '66'
+      case '0':
+        return xTruncated.charAt(xTruncated.length - 1) === '.' ? xTruncated.substring(0, xTruncated.length - 1) : xTruncated
+      case '9':
+        let precisionMatch = xTruncated.match(/[0-9]+\.([0-9]*)/)
+        
+        if(precisionMatch[1]){
+          return parseFloat(xTruncated) + Math.pow(10, -1 * precisionMatch[1].length)
+        } else {
+          return parseFloat(xTruncated) + 1
+        }
+    }
+  } else {
+    return x
+  }
+}
+
 const ConversionProblemType = class {
   // @param {number} increment
   // @param {number} conversion The ratio pr formula for unit conversion
