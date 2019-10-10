@@ -41,9 +41,9 @@ function fixRepeat(x){
         let precisionMatch = xTruncated.match(/[0-9]+\.([0-9]*)/)
         
         if(precisionMatch[1]){
-          return parseFloat(xTruncated) + Math.pow(10, -1 * precisionMatch[1].length)
+          return fixRepeat(parseFloat(xTruncated) + Math.pow(10, -1 * precisionMatch[1].length))
         } else {
-          return parseFloat(xTruncated) + 1
+          return fixRepeat(parseFloat(xTruncated) + 1)
         }
     }
   } else {
@@ -377,7 +377,7 @@ const toMetric = new Vue({
       let roll = Math.random()
       
       if(roll < 0.5){
-        this.difficulty += 1
+        this.difficulty += 5
       } else {
         this.levelUpQuota += 1
       }
