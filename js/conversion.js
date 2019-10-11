@@ -17,21 +17,21 @@ function generateFormula (ratio, imperial, metric) {
 // Corrected javascript round function
 //  @param  {number} x The number to be rounded
 //  @return {number} x rounded down if its decimal component is at most .5 otherwise x rounded up
-function round(x){
-  return (x % 1 <= .5) ? Math.floor(x) : Math.floor(x) + 1
+function round (x) {
+  return (x % 1 <= 0.5) ? Math.floor(x) : Math.floor(x) + 1
 }
 
 // Shortens numbers with repeating decimals
-//  @param  {number} x The number to be shortened if necessary 
-//  @return {number} A shortened version of x if x trailed in a repeating decimal otherwise just x 
-function fixRepeat(x){
+//  @param  {number} x The number to be shortened if necessary
+//  @return {number} A shortened version of x if x trailed in a repeating decimal otherwise just x
+function fixRepeat (x) {
   const repeatPattern = /^([0-9.\-]+?)(0{3,}|1{3,}|3{3,}|6{3,}|8{3,}|9{3,})/
-  let matchRepeat = x.toString().match(repeatPattern)
-  
-  if(matchRepeat){
-    let xTruncated = matchRepeat[1]
-      
-    switch(matchRepeat[2].charAt(1)){
+  const matchRepeat = x.toString().match(repeatPattern)
+
+  if (matchRepeat) {
+    const xTruncated = matchRepeat[1]
+
+    switch (matchRepeat[2].charAt(1)) {
       case '1':
         return xTruncated + '11'
       case '3':
@@ -44,21 +44,21 @@ function fixRepeat(x){
         return xTruncated.charAt(xTruncated.length - 1) === '.' ? xTruncated.substring(0, xTruncated.length - 1) : xTruncated
       case '9':
         console.log(x)
-        let precisionMatch = xTruncated.match(/[0-9]+\.([0-9]*)/)
-        let x2 = parseFloat(xTruncated) + Math.pow(10, -1 * precisionMatch[1].length)
-        
-        if(x2.toString().match(repeatPattern)){
+        const precisionMatch = xTruncated.match(/[0-9]+\.([0-9]*)/)
+        const x2 = parseFloat(xTruncated) + Math.pow(10, -1 * precisionMatch[1].length)
+
+        if (x2.toString().match(repeatPattern)) {
           let offsetPlaceValue = 0
           let x3
-          
-          do{
+
+          do {
             x3 = fixRepeat(parseFloat(xTruncated) + Math.pow(10, -1 * (precisionMatch[1].length + 4 + offsetPlaceValue)))
             offsetPlaceValue++
-          } while(x3.toString().match(repeatPattern))
-            
+          } while (x3.toString().match(repeatPattern))
+
           return x3
         }
-        
+
         return x2
     }
   } else {
@@ -137,12 +137,11 @@ const unreasonableConversionTypes = {
   milescentimeters: new ConversionProblemType(160934.4, 'mi', 'cm', (range) => {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
   }),
-  
+
   poundsgrams: new ConversionProblemType(453.592, 'lb', 'g', (range) => {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
   }),
-  
-  
+
   quartsmilliliters: new ConversionProblemType(946.3, 'qt', 'mL', (range) => {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
   }),
@@ -179,11 +178,11 @@ const conversionTypes = {
   mileskilometers: new ConversionProblemType(1.609, 'mi', 'km', (range) => {
     return 1 + 1 * Math.ceil(Math.random() * range)
   }),
-  
-  fahrenheitcelsius: new ConversionProblemType((imperial) => (imperial - 32) * 5/9, '°F', '°C', (range) => {
+
+  fahrenheitcelsius: new ConversionProblemType((imperial) => (imperial - 32) * 5 / 9, 'ï¿½F', 'ï¿½C', (range) => {
     return -20 + 5 * Math.ceil(Math.random() * range)
-  }, '\\[ (°F - 32) \\times \\frac{5}{9} = °C \\]'),
-  
+  }, '\\[ (ï¿½F - 32) \\times \\frac{5}{9} = ï¿½C \\]'),
+
   ouncesgrams: new ConversionProblemType(28.349, 'oz', 'g', (range) => {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
   }),
@@ -193,7 +192,7 @@ const conversionTypes = {
   poundskilograms: new ConversionProblemType(0.453, 'lb', 'kg', (range) => {
     return 1 + 1 * Math.ceil(Math.random() * range)
   }),
-  
+
   fluidOuncesmilliliters: new ConversionProblemType(29.57, 'fl oz', 'mL', (range) => {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
   }),
@@ -247,8 +246,8 @@ const config = JSON.parse(localStorage.getItem('ToMetric.Options'))
 function pruneDisabledProblems (measurementType) {
   const customaryUnits = measurementType.customary
   const metricUnits = measurementType.metric
-  
-  if(!measurementType.on){
+
+  if (!measurementType.on) {
     for (const customaryUnit in customaryUnits) {
       for (const metricUnit in metricUnits) {
         delete conversionTypes[customaryUnit + metricUnit]
@@ -260,7 +259,7 @@ function pruneDisabledProblems (measurementType) {
 
       for (const metricUnit in metricUnits) {
         const metricUnitEnabled = metricUnits[metricUnit].on
-      
+
         if (!(customaryUnitEnabled && metricUnitEnabled)) {
           delete conversionTypes[customaryUnit + metricUnit]
         }
@@ -271,11 +270,11 @@ function pruneDisabledProblems (measurementType) {
 
 if (config) {
   // If abnormal conversions are enabled
-  if(!config.general.likeConversions){
+  if (!config.general.likeConversions) {
     // Add strange conversions to the problem pool
     Object.assign(conversionTypes, unreasonableConversionTypes)
   }
-  
+
   const measurements = Object.values(config.measurements)
 
   // Remove disabled measurements
@@ -300,7 +299,7 @@ const toMetric = new Vue({
     overlay: true,
     loaded: false,
     metricFact: '',
-      
+
     level: 0,
     levelUpProgress: 0,
     levelUpQuota: 2,
@@ -316,17 +315,17 @@ const toMetric = new Vue({
 
     formula: '',
     showFormula: false,
-    
+
     roundStats: [],
 
     tolerance: config ? config.general.precision : 5
   },
   computed: {
     // Makes it so float errors don't produce a very long string in the given imperial measurement box
-    givenWithoutFloatErrors: function(){
-      let floatCheck = this.given.toString().match(/(^[0-9]+\.[0-9]?)0+/)
-      
-      if(floatCheck){
+    givenWithoutFloatErrors: function () {
+      const floatCheck = this.given.toString().match(/(^[0-9]+\.[0-9]?)0+/)
+
+      if (floatCheck) {
         return floatCheck[1]
       } else {
         return this.given
@@ -337,9 +336,9 @@ const toMetric = new Vue({
     // Checks if the user conversion was close enough
     checkAnswer: function () {
       const exactConversion = this.exactConversion
-      let percentError = Math.abs(exactConversion - this.userAnswer) * 100 / exactConversion
+      const percentError = Math.abs(exactConversion - this.userAnswer) * 100 / exactConversion
 
-      if (percentError <= this.tolerance) {// Acceptable answer
+      if (percentError <= this.tolerance) { // Acceptable answer
         this.onCorrect({
           errorPercent: round(percentError) ? Math.abs(round(percentError)) : '< 0',
           errorAmount: `${fixRepeat(Math.abs(this.userAnswer - exactConversion))} (${this.metricAbbrev})`,
@@ -347,10 +346,10 @@ const toMetric = new Vue({
           given: `${this.givenWithoutFloatErrors} (${this.imperialAbbrev})`,
           tries: this.tries
         })
-        
+
         this.tries = 1
         this.loadNewProblem()
-      } else {// Answer not accurate enough
+      } else { // Answer not accurate enough
         this.answerClass = 'grey darken-3 wrong'
         this.tries++
       }
@@ -379,27 +378,27 @@ const toMetric = new Vue({
     },
     onCorrect: function (problemStats) {
       this.levelUpProgress += 1
-        
-      if(this.levelUpProgress === this.levelUpQuota){
+
+      if (this.levelUpProgress === this.levelUpQuota) {
         this.levelUpProgress = 0
         this.showStats()
       }
-      
+
       this.roundStats.push(problemStats)
     },
-    onLevelUp: function(){
+    onLevelUp: function () {
       this.level++
-      let roll = Math.random()
-      
-      if(roll < 0.5){
+      const roll = Math.random()
+
+      if (roll < 0.5) {
         this.difficulty += 5
       } else {
         this.levelUpQuota += 1
       }
-      
+
       this.roundStats = []
     },
-    showStats: function(){
+    showStats: function () {
       this.roundStatsModal.open()
     }
   },
@@ -410,14 +409,14 @@ const toMetric = new Vue({
         this.onLevelUp()
       }
     })
-    
-    this.roundStatsModal = M.Modal.getInstance(document.getElementById('round-stats'));
 
-    MathJax.Hub.Register.StartupHook("End",() => {
+    this.roundStatsModal = M.Modal.getInstance(document.getElementById('round-stats'))
+
+    MathJax.Hub.Register.StartupHook('End', () => {
       this.loaded = true
       this.metricFact = `<p>${metricFacts[Math.floor(Math.random() * metricFacts.length)]}</p><p class="grey-text text-lighten-2">Click anywhere to continue</p>`
-      
+
       this.loadNewProblem()
-    });
+    })
   }
 })
