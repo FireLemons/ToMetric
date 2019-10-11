@@ -180,9 +180,9 @@ const conversionTypes = {
     return 1 + 1 * Math.ceil(Math.random() * range)
   }),
 
-  fahrenheitcelsius: new ConversionProblemType((imperial) => (imperial - 32) * 5 / 9, 'ï¿½F', 'ï¿½C', (range) => {
+  fahrenheitcelsius: new ConversionProblemType((imperial) => (imperial - 32) * 5 / 9, '°F', '°C', (range) => {
     return -20 + 5 * Math.ceil(Math.random() * range)
-  }, '\\[ (ï¿½F - 32) \\times \\frac{5}{9} = ï¿½C \\]'),
+  }, '\\[ (°F - 32) \\times \\frac{5}{9} = °C \\]'),
 
   ouncesgrams: new ConversionProblemType(28.349, 'oz', 'g', (range) => {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
