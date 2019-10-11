@@ -25,7 +25,7 @@ function round (x) {
 //  @param  {number} x The number to be shortened if necessary
 //  @return {number} A shortened version of x if x trailed in a repeating decimal otherwise just x
 function fixRepeat (x) {
-  const repeatPattern = /^([0-9.\-]+?)(0{3,}|1{3,}|3{3,}|6{3,}|8{3,}|9{3,})/
+  const repeatPattern = /^([0-9.\-]+?)(0{3,}|1{3,}|2{3,}|3{3,}|6{3,}|8{3,}|9{3,})/
   const matchRepeat = x.toString().match(repeatPattern)
 
   if (matchRepeat) {
@@ -34,6 +34,8 @@ function fixRepeat (x) {
     switch (matchRepeat[2].charAt(1)) {
       case '1':
         return xTruncated + '11'
+      case '2':
+        return xTruncated + '22'
       case '3':
         return xTruncated + '33'
       case '6':
@@ -43,7 +45,6 @@ function fixRepeat (x) {
       case '0':
         return xTruncated.charAt(xTruncated.length - 1) === '.' ? xTruncated.substring(0, xTruncated.length - 1) : xTruncated
       case '9':
-        console.log(x)
         const precisionMatch = xTruncated.match(/[0-9]+\.([0-9]*)/)
         const x2 = parseFloat(xTruncated) + Math.pow(10, -1 * precisionMatch[1].length)
 
@@ -226,15 +227,21 @@ const metricFacts = [
   'The Gimli Glider was a Boeing 747 that ran out of fuel mid flight. During refueling, the crew used a conversion factor for pounds instead of the correct one for kilograms.',
   'An inch is about 25 millimeters',
   'An inch is about 2.5 centimeters',
-  'A foot is about 3 tenths of a meter',
+  'An inch is about .025 meters',
+  'A foot is about 30% of a meter',
+  'A foot is about 30 centimeters',
+  'A yard is about 90 centimeters'
+  'A yard is about 90% of a meter'
   'A mile is about 1600 meters',
   'A mile is about 1.6 kilometers',
   'An ounce is about 28 grams',
   'An ounce is about 3 hundredths of a kilogram',
+  'A pound is a little less than half a kilogram'
   'A fluid ounce is about 30 milliliters',
   'A fluid ounce is about 3 hundredths of a liter',
-  'A pint is about half a liter',
-  'A quart is about 9 tenths of a liter',
+  'A pint is a little less than half a liter',
+  'A pint is about 470 milliliters',
+  'A quart is a little under a liter',
   'A gallon is about 3.8 liters'
 ]
 
