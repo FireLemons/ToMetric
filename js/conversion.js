@@ -25,7 +25,7 @@ function round (x) {
 //  @param  {number} x The number to be shortened if necessary
 //  @return {number} A shortened version of x if x trailed in a repeating decimal otherwise just x
 function fixRepeat (x) {
-  const repeatPattern = /^([0-9.\-]+?)(0{3,}|1{3,}|2{3,}|3{3,}|6{3,}|8{3,}|9{3,})/
+  const repeatPattern = /^([0-9.\-]+?)(0{3,}|1{3,}|2{3,}|3{3,}|4{3,}|5{3,}|6{3,}|7{3,}|8{3,}|9{3,})/
   const matchRepeat = x.toString().match(repeatPattern)
 
   if (matchRepeat) {
@@ -38,8 +38,14 @@ function fixRepeat (x) {
         return xTruncated + '22'
       case '3':
         return xTruncated + '33'
+      case '4':
+        return xTruncated + '44'
+      case '5':
+        return xTruncated + '55'
       case '6':
         return xTruncated + '67'
+      case '7':
+        return xTruncated + '78'
       case '8':
         return xTruncated + '89'
       case '0':
@@ -343,8 +349,8 @@ const toMetric = new Vue({
     // Checks if the user conversion was close enough
     checkAnswer: function () {
       const exactConversion = this.exactConversion
-      const percentError = Math.abs(exactConversion - this.userAnswer) * 100 / exactConversion
-
+      const percentError = Math.abs((exactConversion - this.userAnswer) * 100 / exactConversion)
+      
       if (percentError <= this.tolerance) { // Acceptable answer
         this.onCorrect({
           errorPercent: round(percentError) ? Math.abs(round(percentError)) : '< 0',
