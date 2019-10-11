@@ -230,13 +230,13 @@ const metricFacts = [
   'An inch is about .025 meters',
   'A foot is about 30% of a meter',
   'A foot is about 30 centimeters',
-  'A yard is about 90 centimeters'
-  'A yard is about 90% of a meter'
+  'A yard is about 90 centimeters',
+  'A yard is about 90% of a meter',
   'A mile is about 1600 meters',
   'A mile is about 1.6 kilometers',
   'An ounce is about 28 grams',
   'An ounce is about 3 hundredths of a kilogram',
-  'A pound is a little less than half a kilogram'
+  'A pound is a little less than half a kilogram',
   'A fluid ounce is about 30 milliliters',
   'A fluid ounce is about 3 hundredths of a liter',
   'A pint is a little less than half a liter',
