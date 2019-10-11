@@ -25,26 +25,41 @@ function round(x){
 //  @param  {number} x The number to be shortened if necessary 
 //  @return {number} A shortened version of x if x trailed in a repeating decimal otherwise just x 
 function fixRepeat(x){
-  let matchRepeat = x.toString().match(/^([0-9.\-]+?)(0{3,}|3{3,}|6{3,}|9{3,})/)
+  const repeatPattern = /^([0-9.\-]+?)(0{3,}|1{3,}|3{3,}|6{3,}|8{3,}|9{3,})/
+  let matchRepeat = x.toString().match(repeatPattern)
   
   if(matchRepeat){
     let xTruncated = matchRepeat[1]
       
     switch(matchRepeat[2].charAt(1)){
+      case '1':
+        return xTruncated + '11'
       case '3':
         return xTruncated + '33'
       case '6':
-        return xTruncated + '66'
+        return xTruncated + '67'
+      case '8':
+        return xTruncated + '89'
       case '0':
         return xTruncated.charAt(xTruncated.length - 1) === '.' ? xTruncated.substring(0, xTruncated.length - 1) : xTruncated
       case '9':
+        console.log(x)
         let precisionMatch = xTruncated.match(/[0-9]+\.([0-9]*)/)
+        let x2 = parseFloat(xTruncated) + Math.pow(10, -1 * precisionMatch[1].length)
         
-        if(precisionMatch[1]){
-          return fixRepeat(parseFloat(xTruncated) + Math.pow(10, -1 * precisionMatch[1].length))
-        } else {
-          return fixRepeat(parseFloat(xTruncated) + 1)
+        if(x2.toString().match(repeatPattern)){
+          let offsetPlaceValue = 0
+          let x3
+          
+          do{
+            x3 = fixRepeat(parseFloat(xTruncated) + Math.pow(10, -1 * (precisionMatch[1].length + 4 + offsetPlaceValue)))
+            offsetPlaceValue++
+          } while(x3.toString().match(repeatPattern))
+            
+          return x3
         }
+        
+        return x2
     }
   } else {
     return x
@@ -326,7 +341,7 @@ const toMetric = new Vue({
 
       if (percentError <= this.tolerance) {// Acceptable answer
         this.onCorrect({
-          errorPercent: round(percentError) ? round(percentError) : '< 0',
+          errorPercent: round(percentError) ? Math.abs(round(percentError)) : '< 0',
           errorAmount: `${fixRepeat(Math.abs(this.userAnswer - exactConversion))} (${this.metricAbbrev})`,
           exactConversion: `${fixRepeat(exactConversion)} (${this.metricAbbrev})`,
           given: `${this.givenWithoutFloatErrors} (${this.imperialAbbrev})`,
