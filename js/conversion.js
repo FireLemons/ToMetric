@@ -186,9 +186,9 @@ const conversionTypes = {
     return 1 + 1 * Math.ceil(Math.random() * range)
   }),
 
-  fahrenheitcelsius: new ConversionProblemType((imperial) => (imperial - 32) * 5 / 9, '캟', '캜', (range) => {
+  fahrenheitcelsius: new ConversionProblemType((imperial) => (imperial - 32) * 5 / 9, '째F', '째C', (range) => {
     return -20 + 5 * Math.ceil(Math.random() * range)
-  }, '\\[ (캟 - 32) \\times \\frac{5}{9} = 캜 \\]'),
+  }, '\\[ (째F - 32) \\times \\frac{5}{9} = 째C \\]'),
 
   ouncesgrams: new ConversionProblemType(28.349, 'oz', 'g', (range) => {
     return 1 + 0.1 * Math.ceil(Math.random() * range)
