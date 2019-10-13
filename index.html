@@ -137,6 +137,7 @@
                         <thead>
                             <tr>
                                 <th>Customary Unit</th>
+                                <th>Your Answer</th>
                                 <th>Exact Answer</th>
                                 <th>Error Amount</th>
                                 <th>% Error</th>
@@ -146,6 +147,7 @@
                         <tbody>
                           <tr v-for="problemStats in roundStats">
                             <td>{{problemStats.given}}</td>
+                            <td>{{problemStats.userConversion}}</td>
                             <td>{{problemStats.exactConversion}}</td>
                             <td>{{problemStats.errorAmount}}</td>
                             <td>{{problemStats.errorPercent}}</td>

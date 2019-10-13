@@ -356,12 +356,12 @@ const toMetric = new Vue({
           errorPercent: round(percentError) ? Math.abs(round(percentError)) : '< 0',
           errorAmount: `${fixRepeat(Math.abs(this.userAnswer - exactConversion))} (${this.metricAbbrev})`,
           exactConversion: `${fixRepeat(exactConversion)} (${this.metricAbbrev})`,
+          userConversion: `${this.userAnswer} (${this.metricAbbrev})`,
           given: `${this.givenWithoutFloatErrors} (${this.imperialAbbrev})`,
           tries: this.tries
         })
 
         this.tries = 1
-        this.loadNewProblem()
       } else { // Answer not accurate enough
         this.answerClass = 'grey darken-3 wrong'
         this.tries++
@@ -395,6 +395,8 @@ const toMetric = new Vue({
       if (this.levelUpProgress === this.levelUpQuota) {
         this.levelUpProgress = 0
         this.showStats()
+      } else {
+        this.loadNewProblem()
       }
 
       this.roundStats.push(problemStats)
@@ -409,6 +411,7 @@ const toMetric = new Vue({
         this.levelUpQuota += 1
       }
 
+      this.loadNewProblem()
       this.roundStats = []
     },
     showStats: function () {
