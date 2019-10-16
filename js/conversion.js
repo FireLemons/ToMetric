@@ -122,105 +122,57 @@ const ConversionProblemType = class {
   }
 }
 
+const generateFineImperial = (range) => {
+  return 1 + 0.1 * Math.floor(Math.random() * range)
+}
+
+const generateCoarseImperial = (range) => {
+  return 1 + 1 * Math.floor(Math.random() * range)
+}
+
 const unreasonableConversionTypes = {
-  incheskilometers: new ConversionProblemType(0.0000254, 'in', 'km', (range) => {
-    return 1 + 1 * Math.ceil(Math.random() * range)
-  }),
-  feetmillimeters: new ConversionProblemType(304.8, 'ft', 'mm', (range) => {
-    return 1 + 0.1 * Math.ceil(Math.random() * range)
-  }),
-  feetkilometers: new ConversionProblemType(0.0003048, 'ft', 'km', (range) => {
-    return 1 + 1 * Math.ceil(Math.random() * range)
-  }),
-  yardsmillimeters: new ConversionProblemType(914.4, 'yd', 'mm', (range) => {
-    return 1 + 0.1 * Math.ceil(Math.random() * range)
-  }),
-  yardskilometers: new ConversionProblemType(0.0009144, 'yd', 'km', (range) => {
-    return 1 + 1 * Math.ceil(Math.random() * range)
-  }),
-  milesmillimeters: new ConversionProblemType(1609344, 'mi', 'mm', (range) => {
-    return 1 + 0.1 * Math.ceil(Math.random() * range)
-  }),
-  milescentimeters: new ConversionProblemType(160934.4, 'mi', 'cm', (range) => {
-    return 1 + 0.1 * Math.ceil(Math.random() * range)
-  }),
-
-  poundsgrams: new ConversionProblemType(453.592, 'lb', 'g', (range) => {
-    return 1 + 0.1 * Math.ceil(Math.random() * range)
-  }),
-
-  quartsmilliliters: new ConversionProblemType(946.3, 'qt', 'mL', (range) => {
-    return 1 + 0.1 * Math.ceil(Math.random() * range)
-  }),
-  gallonsmilliliter: new ConversionProblemType(3785.41, 'gal', 'mL', (range) => {
-    return 1 + 0.1 * Math.ceil(Math.random() * range)
-  })
+  incheskilometers: new ConversionProblemType(0.0000254, 'in', 'km', generateCoarseImperial),
+  feetmillimeters: new ConversionProblemType(304.8, 'ft', 'mm', generateFineImperial),
+  feetkilometers: new ConversionProblemType(0.0003048, 'ft', 'km', generateCoarseImperial),
+  yardsmillimeters: new ConversionProblemType(914.4, 'yd', 'mm', generateFineImperial),
+  yardskilometers: new ConversionProblemType(0.0009144, 'yd', 'km', generateCoarseImperial),
+  milesmillimeters: new ConversionProblemType(1609344, 'mi', 'mm', generateFineImperial),
+  milescentimeters: new ConversionProblemType(160934.4, 'mi', 'cm', generateFineImperial),
+  poundsgrams: new ConversionProblemType(453.592, 'lb', 'g', generateFineImperial),
+  quartsmilliliters: new ConversionProblemType(946.3, 'qt', 'mL', generateFineImperial),
+  gallonsmilliliter: new ConversionProblemType(3785.41, 'gal', 'mL', generateFineImperial)
 }
 
 const conversionTypes = {
-  inchesmillimeters: new ConversionProblemType(25.4, 'in', 'mm', (range) => {
-    return 1 + 0.1 * Math.ceil(Math.random() * range)
-  }),
-  inchescentimeters: new ConversionProblemType(2.54, 'in', 'cm', (range) => {
-    return 1 + 0.1 * Math.ceil(Math.random() * range)
-  }),
-  inchesmeters: new ConversionProblemType(0.0254, 'in', 'm', (range) => {
-    return 1 + 1 * Math.ceil(Math.random() * range)
-  }),
-  feetcentimeters: new ConversionProblemType(30.48, 'ft', 'cm', (range) => {
-    return 1 + 0.1 * Math.ceil(Math.random() * range)
-  }),
-  feetmeters: new ConversionProblemType(0.3048, 'ft', 'm', (range) => {
-    return 1 + 1 * Math.ceil(Math.random() * range)
-  }),
-  yardscentimeters: new ConversionProblemType(91.44, 'yd', 'cm', (range) => {
-    return 1 + 0.1 * Math.ceil(Math.random() * range)
-  }),
-  yardsmeters: new ConversionProblemType(0.9144, 'yd', 'm', (range) => {
-    return 1 + 1 * Math.ceil(Math.random() * range)
-  }),
-  milesmeters: new ConversionProblemType(1609.344, 'mi', 'm', (range) => {
-    return 1 + 0.1 * Math.ceil(Math.random() * range)
-  }),
-  mileskilometers: new ConversionProblemType(1.609, 'mi', 'km', (range) => {
-    return 1 + 1 * Math.ceil(Math.random() * range)
-  }),
+  inchesmillimeters: new ConversionProblemType(25.4, 'in', 'mm', generateFineImperial),
+  inchescentimeters: new ConversionProblemType(2.54, 'in', 'cm', generateFineImperial),
+  inchesmeters: new ConversionProblemType(0.0254, 'in', 'm', generateCoarseImperial),
+  feetcentimeters: new ConversionProblemType(30.48, 'ft', 'cm', generateFineImperial),
+  feetmeters: new ConversionProblemType(0.3048, 'ft', 'm', generateCoarseImperial),
+  yardscentimeters: new ConversionProblemType(91.44, 'yd', 'cm', generateFineImperial),
+  yardsmeters: new ConversionProblemType(0.9144, 'yd', 'm', generateCoarseImperial),
+  milesmeters: new ConversionProblemType(1609.344, 'mi', 'm', generateFineImperial),
+  mileskilometers: new ConversionProblemType(1.609, 'mi', 'km', generateCoarseImperial),
 
   fahrenheitcelsius: new ConversionProblemType((imperial) => (imperial - 32) * 5 / 9, '°F', '°C', (range) => {
     return -20 + 5 * Math.ceil(Math.random() * range)
   }, '\\[ (°F - 32) \\times \\frac{5}{9} = °C \\]'),
 
-  ouncesgrams: new ConversionProblemType(28.349, 'oz', 'g', (range) => {
-    return 1 + 0.1 * Math.ceil(Math.random() * range)
-  }),
-  ounceskilograms: new ConversionProblemType(0.02834, 'oz', 'kg', (range) => {
-    return 1 + 1 * Math.ceil(Math.random() * range)
-  }),
-  poundskilograms: new ConversionProblemType(0.453, 'lb', 'kg', (range) => {
-    return 1 + 1 * Math.ceil(Math.random() * range)
-  }),
+  ouncesgrams: new ConversionProblemType(28.349, 'oz', 'g', generateFineImperial),
+  ounceskilograms: new ConversionProblemType(0.02834, 'oz', 'kg', generateCoarseImperial),
+  poundskilograms: new ConversionProblemType(0.453, 'lb', 'kg', generateCoarseImperial),
 
-  fluidOuncesmilliliters: new ConversionProblemType(29.57, 'fl oz', 'mL', (range) => {
-    return 1 + 0.1 * Math.ceil(Math.random() * range)
-  }),
-  fluidOuncesliters: new ConversionProblemType(0.02957, 'fl oz', 'L', (range) => {
-    return 1 + 1 * Math.ceil(Math.random() * range)
-  }),
-  pintsmilliliters: new ConversionProblemType(473.2, 'pt', 'mL', (range) => {
-    return 1 + 0.1 * Math.ceil(Math.random() * range)
-  }),
-  pintsliters: new ConversionProblemType(0.4732, 'pt', 'L', (range) => {
-    return 1 + 1 * Math.ceil(Math.random() * range)
-  }),
-  quartsliters: new ConversionProblemType(0.9463, 'qt', 'L', (range) => {
-    return 1 + 1 * Math.ceil(Math.random() * range)
-  }),
-  gallonsliters: new ConversionProblemType(3.785, 'gal', 'L', (range) => {
-    return 1 + 1 * Math.ceil(Math.random() * range)
-  }),
-  milesPerHourkilometersPerHour: new ConversionProblemType(1.609, 'mph', 'kph', (range) => {
-    return 1 + 1 * Math.ceil(Math.random() * range)
-  })
+  fluidOuncesmilliliters: new ConversionProblemType(29.57, 'fl oz', 'mL', generateFineImperial),
+  fluidOuncesliters: new ConversionProblemType(0.02957, 'fl oz', 'L', generateCoarseImperial),
+  pintsmilliliters: new ConversionProblemType(473.2, 'pt', 'mL', generateFineImperial),
+  pintsliters: new ConversionProblemType(0.4732, 'pt', 'L', generateCoarseImperial),
+  quartsliters: new ConversionProblemType(0.9463, 'qt', 'L', generateCoarseImperial),
+  gallonsliters: new ConversionProblemType(3.785, 'gal', 'L', generateCoarseImperial),
+  
+  feetPerSecondmetersPerSecond: new ConversionProblemType(0.3048, 'ft/s', 'm/s', generateCoarseImperial, '\\[ 1\\,\\mathrm{\\frac{ft}{s}} = 3.048\\,\\mathrm{\\frac{m}{s}} \\times 10^{-1} \\]'),
+  feetPerSecondkilometersPerHour: new ConversionProblemType(1.097, 'ft/s', 'km/h', generateCoarseImperial, '\\[ 1\\,\\mathrm{\\frac{ft}{s}} = 1.097\\,\\mathrm{\\frac{km}{h}} \\]'),
+  milesPerHourmetersPerSecond: new ConversionProblemType(0.44704, 'mph', 'm/s', generateFineImperial, '\\[ 1\\,\\mathrm{\\frac{mi}{h}} = 4.4704\\,\\mathrm{\\frac{m}{s}} \\times 10^{-1} \\]'),
+  milesPerHourkilometersPerHour: new ConversionProblemType(1.609, 'mph', 'km/h', generateCoarseImperial, '\\[ 1\\,\\mathrm{\\frac{mi}{h}} = 1.609\\,\\mathrm{\\frac{km}{h}} \\]')
 }
 
 const metricFacts = [
@@ -230,7 +182,7 @@ const metricFacts = [
   'Joseph Dombey was sent to the US to help with metrication. On his way across the Atlantic he was captured by privateers and held captive in Montserrat where he died.',
   'Interstate 19 in Arizona is the only freeway in America that uses the metric system.',
   'The Mars Climate Orbiter was lost in space because some of its software was feeding customary unit output into another piece expecting metric units.',
-  'The Gimli Glider was a Boeing 747 that ran out of fuel mid flight. During refueling, the crew used a conversion factor for pounds instead of the correct one for kilograms.',
+  'The Gimli Glider was a Boeing 747 that ran out of fuel mid flight. During refueling, the crew used a conversion factor for pounds instead of one for kilograms.',
   'An inch is about 25 millimeters',
   'An inch is about 2.5 centimeters',
   'An inch is about .025 meters',
@@ -283,7 +235,7 @@ function pruneDisabledProblems (measurementType) {
 
 if (config) {
   // If abnormal conversions are enabled
-  if (!config.general.likeConversions) {
+  if (config.general.oddConversions) {
     // Add strange conversions to the problem pool
     Object.assign(conversionTypes, unreasonableConversionTypes)
   }

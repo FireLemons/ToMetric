@@ -227,12 +227,20 @@ const options = new Vue({
           name: 'speed',
           on: true,
           customary: {
+            feetPerSecond: {
+              displayText: 'Feet/Second',
+              on: true
+            },
             milesPerHour: {
               displayText: 'Miles/Hour',
               on: true
             }
           },
           metric: {
+            metersPerSecond: {
+              displayText: 'Meters/Second',
+              on: true
+            },
             kilometersPerHour: {
               displayText: 'Kilometers/Hour',
               on: true
@@ -258,7 +266,7 @@ const options = new Vue({
         }
       },
       general: {
-        likeConversions: true,
+        oddConversions: false,
         precision: 5
       }
     }

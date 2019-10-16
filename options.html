@@ -25,16 +25,16 @@
                             <div class="flex">
                                 <p class="white-text">Precision</p>
                                 <label class="help">
-                                    <i class="material-icons left tooltipped" data-position="top" data-tooltip="Acceptable amount of percent error">help</i>
+                                    <i class="material-icons left tooltipped" data-position="top" data-tooltip="Acceptable amount of error(percentage)">help</i>
                                 </label>
                                 <p class="range-field">
                                     <input type="range" min="1" max="20" v-model="options.general.precision"/>
                                 </p>
                             </div>
                             <div class="flex">
-                                <p class="white-text">Convert Like Units</p>
+                                <p class="white-text">Unreasonable Conversions</p>
                                 <label class="help">
-                                    <i class="material-icons left tooltipped" data-position="bottom" data-tooltip="Enabling this option means there will never be conversions where the units are very different in scale. e.g. inches to kilometers">help</i>
+                                    <i class="material-icons left tooltipped" data-position="bottom" data-tooltip="Enable to see conversions where the units are very different in scale(e.g. inches to kilometers)">help</i>
                                 </label>
                                     
                                 <div class="switch">
