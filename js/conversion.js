@@ -272,8 +272,8 @@ const toMetric = new Vue({
 
     given: 0,
     imperialAbbrev: '',
-    answerClass: 'grey darken-3',
     userAnswer: '',
+    wrongAnswer: true,
     tries: 1,
     exactConversion: 0,
     metricAbbrev: '',
@@ -297,6 +297,13 @@ const toMetric = new Vue({
       }
     }
   },
+  directives: {
+    focus: {
+      inserted: function (el) {
+        el.focus()
+      }
+    }
+  },
   methods: {
     // Checks if the user conversion was close enough
     checkAnswer: function () {
@@ -315,7 +322,7 @@ const toMetric = new Vue({
 
         this.tries = 1
       } else { // Answer not accurate enough
-        this.answerClass = 'grey darken-3 wrong'
+        this.wrongAnswer = !this.wrongAnswer
         this.tries++
       }
     },
@@ -326,7 +333,6 @@ const toMetric = new Vue({
     },
     loadNewProblem: function () {
       // Reset answer box
-      this.answerClass = 'grey darken-3'
       this.userAnswer = ''
 
       const problem = this.getProblem()

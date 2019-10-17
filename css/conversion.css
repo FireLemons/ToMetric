@@ -1,3 +1,18 @@
+@keyframes flash {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 @keyframes increaseIndicaton {
   0% {
       color: white;
@@ -25,18 +40,18 @@
     }
 }
 
-@keyframes flash {
+@keyframes wrongAnswer {
     0% {
-        opacity: 0;
+        color: white;
     }
-    10% {
-        opacity: 1;
+    20% {
+        color: #c62828;
     }
-    90% {
-        opacity: 1;
+    80% {
+        color: #c62828;
     }
-    100% {
-        opacity: 0;
+    100%{
+        color: white;
     }
 }
 
@@ -63,16 +78,19 @@ span.card-title:hover{
 }
 
 .fade-enter, .fade-leave-to, .flash-enter, .flash-enter-to, .flash-leave{
-  opacity: 0;
+    opacity: 0;
 }
 
-.flash-enter-active {
-  animation: flash 4s;
+.flash-enter-active{
+    animation: flash 4s;
 }
 
 .increase-indication-enter-active{
-    animation-name: increaseIndicaton;
-    animation-duration: 750ms;
+    animation: increaseIndicaton 750ms;
+}
+
+.wrong-answer-enter-active{
+    animation: wrongAnswer 250ms;
 }
 
 #app{
@@ -323,5 +341,6 @@ span.card-title:hover{
 @media screen and (max-aspect-ratio: 8/7){
     #conversionInput input{
         font-size: 14pt;
+        flex: 5 0 0;
     }
 }

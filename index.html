@@ -124,7 +124,9 @@
                     </div>
                     <label> = </label>
                     <div class="flex">
-                        <input class="input-field" type="number" v-bind:class="answerClass" v-model="userAnswer" @keyup.enter="checkAnswer">
+                        <transition name="wrong-answer" mode="out-in">
+                            <input class="input-field grey darken-3" type="number" :key="wrongAnswer" v-focus v-model="userAnswer" @keyup.enter="checkAnswer">
+                        </transition>
                         <input type="text" :value="metricAbbrev" disabled>
                     </div>
 				</div>
