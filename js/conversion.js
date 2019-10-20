@@ -183,6 +183,15 @@ const metricFacts = [
   'Interstate 19 in Arizona is the only freeway in America that uses the metric system.',
   'The Mars Climate Orbiter was lost in space because some of its software was feeding customary unit output into another piece expecting metric units.',
   'The Gimli Glider was a Boeing 747 that ran out of fuel mid flight. During refueling, the crew used a conversion factor for pounds instead of one for kilograms.',
+  
+  'The fractional metric prefixes in decreasing order of magnitude are: deci, centi, milli, micro, nano, pico, femto, atto, zepto, yocto',
+  'The multiple metric prefixes in increasing order of magnitude are: deca, hecto, kilo, mega, giga, tera, peta, exa, zetta, yotta',
+  
+  'An apple is usually 7 to 8 centimeters',
+  'A person is about 1.7 meters tall',
+  'CDs are 12 centimeters wide',
+  'Cars are about 4 to 5 meters long',
+  
   'An inch is about 25 millimeters',
   'An inch is about 2.5 centimeters',
   'An inch is about .025 meters',
@@ -270,6 +279,11 @@ const toMetric = new Vue({
     levelUpQuota: 2,
     difficulty: 5,
 
+    secondsPerProblem: 60,
+    secondsLeft: 60,
+    paused: false,
+    countdownIntervalID: null,
+
     given: 0,
     imperialAbbrev: '',
     userAnswer: '',
@@ -277,13 +291,12 @@ const toMetric = new Vue({
     tries: 1,
     exactConversion: 0,
     metricAbbrev: '',
+    tolerance: config ? config.general.precision : 5,
 
     formula: '',
     showFormula: false,
 
-    roundStats: [],
-
-    tolerance: config ? config.general.precision : 5
+    roundStats: []
   },
   computed: {
     // Makes it so float errors don't produce a very long string in the given imperial measurement box
@@ -348,6 +361,7 @@ const toMetric = new Vue({
       renderTeX(problem.formula)
     },
     onCorrect: function (problemStats) {
+      this.secondsLeft = this.secondsPerProblem
       this.levelUpProgress += 1
 
       if (this.levelUpProgress === this.levelUpQuota) {
@@ -373,7 +387,16 @@ const toMetric = new Vue({
       this.roundStats = []
     },
     showStats: function () {
+      this.paused = true
       this.roundStatsModal.open()
+      
+      if(!this.countdownIntervalID){
+          this.countdownIntervalID = setInterval(() => {
+              if(!this.paused){
+                  this.secondsLeft--
+              }
+          }, 1000)
+      }
     }
   },
   mounted: function () {
@@ -381,6 +404,7 @@ const toMetric = new Vue({
     M.Modal.init(document.querySelectorAll('.modal'), {
       onCloseEnd: () => {
         this.onLevelUp()
+        this.paused = false
       }
     })
 

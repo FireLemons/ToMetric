@@ -35,33 +35,33 @@
                     </noscript>
                     <div id="load-content" class="center-align" v-if="!loaded">
                         <h2>Loading</h2>
-                        <svg width="208" height="64" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="4" height="64" />
-                            <rect x="8" width="4" height="32"/>
-                            <rect x="16" width="4" height="32"/>
-                            <rect x="24" width="4" height="32"/>
-                            <rect x="32" width="4" height="32"/>
-                            <rect x="40" width="4" height="48"/>
-                            <rect x="48" width="4" height="32"/>
-                            <rect x="56" width="4" height="32"/>
-                            <rect x="64" width="4" height="32"/>
-                            <rect x="72" width="4" height="32"/>
-                            <rect x="80" width="4" height="64"/>
-                            <rect x="88" width="4" height="32"/>
-                            <rect x="96" width="4" height="32"/>
-                            <rect x="104" width="4" height="32"/>
-                            <rect x="112" width="4" height="32"/>
-                            <rect x="120" width="4" height="48"/>
-                            <rect x="128" width="4" height="32"/>
-                            <rect x="136" width="4" height="32"/>
-                            <rect x="144" width="4" height="32"/>
-                            <rect x="152" width="4" height="32"/>
-                            <rect x="160" width="4" height="64" />
-                            <rect x="168" width="4" height="32"/>
-                            <rect x="176" width="4" height="32"/>
-                            <rect x="184" width="4" height="32"/>
-                            <rect x="192" width="4" height="32"/>
-                            <rect x="200" width="4" height="48"/>
+                        <svg class="ruler" width="208" xmlns="http://www.w3.org/2000/svg">
+                            <rect class="cmHatch"/>
+                            <rect x="8"/>
+                            <rect x="16"/>
+                            <rect x="24"/>
+                            <rect x="32"/>
+                            <rect x="40" class="halfHatch"/>
+                            <rect x="48"/>
+                            <rect x="56"/>
+                            <rect x="64"/>
+                            <rect x="72"/>
+                            <rect x="80" class="cmHatch"/>
+                            <rect x="88"/>
+                            <rect x="96"/>
+                            <rect x="104"/>
+                            <rect x="112"/>
+                            <rect x="120" class="halfHatch"/>
+                            <rect x="128"/>
+                            <rect x="136"/>
+                            <rect x="144"/>
+                            <rect x="152"/>
+                            <rect x="160" class="cmHatch"/>
+                            <rect x="168"/>
+                            <rect x="176"/>
+                            <rect x="184"/>
+                            <rect x="192"/>
+                            <rect x="200" class="halfHatch"/>
                         </svg>
                     </div>
                     <transition name="fade">
@@ -109,6 +109,12 @@
                                 </span>
                             </transition>
                         </div>
+                    </div>
+                    <div id="countdownBar">
+                        <div v-bind:style="{width: 'calc(' + secondsLeft * 100 / secondsPerProblem + '% - 2em)'}"></div>
+                        <svg xmlns="http://www.w3.org/2000/svg">
+                            <path d="m4 0h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h-1276z"/>
+                        </svg>
                     </div>
                     <a class="btn-large center-align grey darken-2" @click="showFormula=true">Show Formula</a>
 				</div>

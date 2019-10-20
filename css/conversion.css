@@ -73,6 +73,23 @@ span.card-title:hover{
     background-color: #757575 !important;
 }
 
+svg.ruler{
+    height: 64px
+}
+
+svg.ruler rect{
+    width: 4px;
+    height: 32px;
+}
+
+svg.ruler rect.cmHatch{
+    height: 64px;
+}
+
+svg.ruler rect.halfHatch{
+    height: 48px;
+}
+
 .fade-enter-active, .fade-leave-active{
     transition: opacity 1s;
 }
@@ -131,6 +148,24 @@ span.card-title:hover{
     color: red;
 }
 
+#countdownBar{
+    margin: 1em
+}
+
+#countdownBar div{
+    background-color: white;
+    height: 64px; width: calc(100% - 2em);
+    position: absolute;
+    z-index: 1;
+}
+
+#countdownBar svg{
+    fill: #424242;
+    height: 64px; width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
 #display{
     margin: 1em 0;
     position: relative;
@@ -154,13 +189,13 @@ span.card-title:hover{
 
 #display #formula{
     height: 100%; width: 100%;
-    padding: 2.5em 0;
+    padding: 7% 0;
     
     position: absolute;
     left: 0;
     top: 0;
     
-    z-index: 0;
+    z-index: 2;
 }
 
 #display #stats{
@@ -194,15 +229,18 @@ span.card-title:hover{
 #display #stats .flex>*:not(:first-child){
     display: inline;
     font-size: 24pt;
-    padding: 1em 0;
+    padding: .5em 0;
 }
 
 #load-content{
     margin-top: 40vh
 }
 
-#load-content svg rect{
+#load-content svg{
     fill: #bdbdbd;
+}
+
+#load-content svg rect{
     animation-name: whitenBar;
     animation-duration: 650ms;
     animation-iteration-count: infinite;
@@ -312,7 +350,7 @@ span.card-title:hover{
     height: 100%; width: 100%;
     left: 0; top: 0;
     position: fixed;
-    z-index: 2
+    z-index: 10
 }
 
 #round-stats table, #round-stats th, #round-stats td {
