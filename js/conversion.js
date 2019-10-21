@@ -279,8 +279,8 @@ const toMetric = new Vue({
     levelUpQuota: 2,
     difficulty: 5,
 
-    secondsPerProblem: 60,
-    secondsLeft: 60,
+    secondsPerProblem: 30,
+    secondsLeft: 30,
     paused: false,
     countdownIntervalID: null,
 
