@@ -425,15 +425,15 @@ const toMetric = new Vue({
   },
   mounted: function () {
     // Init materialize modals
-    M.Modal.init(document.querySelectorAll('.modal'), {
-      onCloseEnd: () => {
-        this.onLevelUp()
-        this.paused = false
-      }
-    })
+    M.Modal.init(document.querySelectorAll('.modal'))
 
     this.roundStatsModal = M.Modal.getInstance(document.getElementById('round-stats'))
     this.gameOverModal = M.Modal.getInstance(document.getElementById('game-over'))
+    
+    this.roundStatsModal.options.onCloseEnd = () => {
+      this.onLevelUp()
+      this.paused = false
+    }
 
     MathJax.Hub.Register.StartupHook('End', () => {
       this.loaded = true
