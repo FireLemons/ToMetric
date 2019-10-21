@@ -386,6 +386,26 @@ const toMetric = new Vue({
       this.loadNewProblem()
       this.roundStats = []
     },
+    onLoseGame: function () {
+        this.gameOverModal.open()
+        
+        clearInterval(this.countdownIntervalID)
+        
+        this.level = 0
+        this.levelUpProgress = 0
+        this.levelUpQuota = 2
+        this.difficulty = 5
+
+        this.secondsPerProblem = 60
+        this.secondsLeft = 60
+        this.paused = false,
+        this.countdownIntervalID = null
+    
+        this.loadNewProblem()
+        this.tries = 1,
+
+        this.roundStats = []
+    },
     showStats: function () {
       this.paused = true
       this.roundStatsModal.open()
@@ -394,6 +414,10 @@ const toMetric = new Vue({
           this.countdownIntervalID = setInterval(() => {
               if(!this.paused){
                   this.secondsLeft--
+              }
+              
+              if(this.secondsLeft <= 0){
+                  this.onLoseGame()
               }
           }, 1000)
       }
@@ -409,6 +433,7 @@ const toMetric = new Vue({
     })
 
     this.roundStatsModal = M.Modal.getInstance(document.getElementById('round-stats'))
+    this.gameOverModal = M.Modal.getInstance(document.getElementById('game-over'))
 
     MathJax.Hub.Register.StartupHook('End', () => {
       this.loaded = true
