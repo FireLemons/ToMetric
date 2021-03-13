@@ -5,6 +5,7 @@ Vue.component("site-nav", {
                 <div class="nav-wrapper">
                     <a href="./" class="brand-logo">ToMetric</a>
                     <ul class="right">
+                        <li><a class="modal-trigger" href="#about-modal">About</a></li>
                         <li><a class="" href="options.html"><i class="material-icons left">settings</i>Options</a></li>
                     </ul>
                 </div>

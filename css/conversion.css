@@ -110,6 +110,10 @@ svg.ruler rect.halfHatch{
     animation: wrongAnswer 250ms;
 }
 
+#about-modal img{
+    width: 100%;
+}
+
 #app{
     color: white;
     margin-top: 8em;
