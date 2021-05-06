@@ -18,8 +18,6 @@ Vue.component("site-nav", {
           <div class="modal-content white-text">
             <h4>About ToMetric</h4>
             <p>A game for developing the ability to estimate the metric equivalent of a customary unit</p>
-            <p>Abandoned forever because metric system advocacy seems to attract strange political people</p>
-            <img src="./img/humanCommunication.png">
           </div>
           <div class="modal-footer grey darken-3">
             <a href="#!" class="modal-close btn-flat white-text">Close</a>
