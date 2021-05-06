@@ -1,7 +1,6 @@
 Vue.component("site-nav", {
   mounted: function() {
     M.Modal.init(document.querySelectorAll('.modal'))
-    console.log("E")
   },
   template: `
       <header>
