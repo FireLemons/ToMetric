@@ -99,7 +99,7 @@ svg.ruler rect.halfHatch{
 }
 
 .flash-enter-active{
-    animation: flash 4s;
+    animation: flash 3s;
 }
 
 .increase-indication-enter-active{
