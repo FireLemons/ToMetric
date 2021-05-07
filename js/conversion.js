@@ -122,7 +122,7 @@ const ConversionProblemType = class {
     this.conversion = conversion
     this.imperial = imperial
     this.metric = metric
-    this.formula = formula || generateFormula(conversion, imperial, metric, true)
+    this.formula = formula || generateFormula(conversion, imperial, metric, false)
     this.generateImperial = generateImperial
   }
 
@@ -271,17 +271,19 @@ if (config) {
   measurements.forEach((measurementType) => {
     pruneDisabledProblems(measurementType)
   })
+
+  if (config.general.scientific) {
+    for (conversionType in conversionTypes) {
+      const problem = conversionTypes[conversionType]
+
+      if (!(problem.conversion instanceof Function)) {
+        problem.formula = generateFormula(problem.conversion, problem.imperial, problem.metric, true)
+      }
+    }
+  }
 }
 
 const problems = Object.values(conversionTypes)
-
-if (!config || (config && !config.general.scientific)) {
-  problems.forEach((problem) => {
-    if (!(problem.conversion instanceof Function)) {
-      problem.formula = generateFormula(problem.conversion, problem.imperial, problem.metric, false)
-    }
-  })
-}
 
 // Renders TeX code in the formula div
 function renderTeX (TeX) {
