@@ -275,7 +275,7 @@ if (config) {
 
 const problems = Object.values(conversionTypes)
 
-if (!config || (config && !config.scientific)) {
+if (!config || (config && !config.general.scientific)) {
   problems.forEach((problem) => {
     if (!(problem.conversion instanceof Function)) {
       problem.formula = generateFormula(problem.conversion, problem.imperial, problem.metric, false)

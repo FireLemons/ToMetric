@@ -267,7 +267,8 @@ const options = new Vue({
       },
       general: {
         oddConversions: false,
-        precision: 5
+        precision: 5,
+        scientific: false
       }
     }
   },
