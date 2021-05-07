@@ -1,17 +1,33 @@
 // Generates a TeX representation of a formula
-//   @param  {number} ratio The ratio for unit conversion
-//   @param  {string} imperial The abbreviation for the imperial unit of the conversion
-//   @param  {string} metric The abbreviation for the metric unit of the conversion
-//   @return {string} the TeX representation of the formula to convert from imperial to metric
-function generateFormula (ratio, imperial, metric) {
-  const ratioAsSciNotation = ratio.toExponential()
-  const coefficientMagnitude = ratioAsSciNotation.match(/([0-9]\.[0-9]+)e([+-][0-9]+)/)
+//   @param  {number}  ratio The ratio for unit conversion
+//   @param  {string}  imperial The abbreviation for the imperial unit of the conversion
+//   @param  {string}  metric The abbreviation for the metric unit of the conversion
+//   @param  {boolean} isScientific True to format the formula in scientific notation, false otherwise
+//   @return {string}  the TeX representation of the formula to convert from imperial to metric
+function generateFormula (ratio, imperial, metric, isScientific) {
+  if (isScientific) {
+    const ratioAsSciNotation = ratio.toExponential()
+    const coefficientMagnitude = ratioAsSciNotation.match(/([0-9]\.[0-9]+)e([+-][0-9]+)/)
 
-  if (coefficientMagnitude[2].charAt(0) === '+') {
-    coefficientMagnitude[2] = coefficientMagnitude[2].substr(1)
+    if (coefficientMagnitude[2].charAt(0) === '+') {
+      coefficientMagnitude[2] = coefficientMagnitude[2].substr(1)
+    }
+
+    return `\\[ 1\\,\\mathrm{${imperial}} = ${coefficientMagnitude[1]}\\,\\mathrm{${metric}}` + (coefficientMagnitude[2] === '0' ? '' : `\\times 10^{${coefficientMagnitude[2]}}`) + '\\]'
+  } else {
+    const floatScientificPattern = /^-?\d(\.\d+)?e(-?\d+)$/
+    const ratioAsString = ratio.toString()
+    const tryCaptureScientific = ratioAsString.match(floatScientificPattern)
+    let coefficient = ''
+
+    if (tryCaptureScientific !== null) {
+      coefficient = ratio.toFixed(Math.abs(parseInt(tryCaptureScientific[2])) + tryCaptureScientific[1] ? tryCaptureScientific[1].length : 0)
+    } else {
+      coefficient = ratioAsString
+    }
+
+    return `\\[ 1\\,\\mathrm{${imperial}} = ${coefficient}\\,\\mathrm{${metric}} \\]`
   }
-
-  return `\\[ 1\\,\\mathrm{${imperial}} = ${coefficientMagnitude[1]}\\,\\mathrm{${metric}}` + (coefficientMagnitude[2] === '0' ? '' : `\\times 10^{${coefficientMagnitude[2]}}`) + '\\]'
 }
 
 // Corrected javascript round function
@@ -106,7 +122,7 @@ const ConversionProblemType = class {
     this.conversion = conversion
     this.imperial = imperial
     this.metric = metric
-    this.formula = formula || generateFormula(conversion, imperial, metric)
+    this.formula = formula || generateFormula(conversion, imperial, metric, true)
     this.generateImperial = generateImperial
   }
 
@@ -258,6 +274,14 @@ if (config) {
 }
 
 const problems = Object.values(conversionTypes)
+
+if (!config || (config && !config.scientific)) {
+  problems.forEach((problem) => {
+    if (!(problem.conversion instanceof Function)) {
+      problem.formula = generateFormula(problem.conversion, problem.imperial, problem.metric, false)
+    }
+  })
+}
 
 // Renders TeX code in the formula div
 function renderTeX (TeX) {
