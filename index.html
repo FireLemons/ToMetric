@@ -125,7 +125,7 @@
                       <label> = </label>
                       <div class="flex">
                           <transition name="wrong-answer" mode="out-in">
-                              <input class="input-field grey darken-3" type="number" :key="wrongAnswer" v-focus v-model="userAnswer" @keyup.enter="checkAnswer">
+                              <input class="input-field grey darken-3" type="number" :disabled="showFormula == true" :key="wrongAnswer" v-focus v-model="userAnswer" @keyup.enter="checkAnswer">
                           </transition>
                           <input type="text" :value="metricAbbrev" disabled>
                       </div>

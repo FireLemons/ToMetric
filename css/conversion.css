@@ -133,6 +133,11 @@ svg.ruler rect.halfHatch{
     text-align: left;
 }
 
+#conversionInput input:nth-child(odd):disabled{
+    cursor: not-allowed;
+    background-color: #493030 !important;
+}
+
 #conversionInput .flex label{
     font-size: 20pt;
     margin: 0 1em;
