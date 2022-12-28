@@ -30,6 +30,17 @@ function generateFormula (ratio, imperial, metric, isScientific) {
   }
 }
 
+// Calculates the average given the current average value and a new data point
+//  @param  {number} newDataPointValue The value of the new data point
+//  @param  {number} previousAverage The current average value
+//  @param  {number} previousSampleCount The current number of samples in the average
+//  @return {number} The new average including the new data point
+function cumulativeAverage (newDataPointValue, previousAverage, previousSampleCount) {
+  return previousAverage + ((newDataPointValue - previousAverage) / (previousSampleCount + 1))
+}
+
+console.log(cumulativeAverage)
+
 // Corrected javascript round function
 //  @param  {number} x The number to be rounded
 //  @return {number} x rounded down if its decimal component is at most .5 otherwise x rounded up
@@ -322,7 +333,12 @@ const toMetric = new Vue({
     formula: '',
     showFormula: false,
 
-    roundStats: []
+    roundStats: [],
+    gameStats: {
+      averageAttemptCount: 0,
+      averageErrorPercent: 0,
+      problemsSolvedCount: 0,
+    }
   },
   computed: {
     // Makes it so float errors don't produce a very long string in the given imperial measurement box
