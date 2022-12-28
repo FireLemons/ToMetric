@@ -39,8 +39,6 @@ function cumulativeAverage (newDataPointValue, previousAverage, previousSampleCo
   return previousAverage + ((newDataPointValue - previousAverage) / (previousSampleCount + 1))
 }
 
-console.log(cumulativeAverage)
-
 // Corrected javascript round function
 //  @param  {number} x The number to be rounded
 //  @return {number} x rounded down if its decimal component is at most .5 otherwise x rounded up
@@ -414,6 +412,11 @@ const toMetric = new Vue({
       }
 
       this.roundStats.push(problemStats)
+      this.gameStats.averageAttemptCount = cumulativeAverage(problemStats.tries, this.gameStats.averageAttemptCount, this.gameStats.problemsSolvedCount)
+      this.gameStats.averageErrorPercent = cumulativeAverage(problemStats.errorPercent === '< 1' ? 0 : problemStats.errorPercent, this.gameStats.averageErrorPercent, this.gameStats.problemsSolvedCount)
+      this.gameStats.problemsSolvedCount++
+
+      console.log(cumulativeAverage(problemStats.tries, this.gameStats.averageAttemptCount, this.gameStats.problemsSolvedCount))
     },
     onLevelUp: function () {
       this.level++
@@ -430,23 +433,27 @@ const toMetric = new Vue({
     },
     onLoseGame: function () {
         this.gameOverModal.open()
-        
+
         clearInterval(this.countdownIntervalID)
-        
-        this.level = 0
-        this.levelUpProgress = 0
-        this.levelUpQuota = 2
-        this.difficulty = 5
+    },
+    resetGame: function () {
+      this.level = 0
+      this.levelUpProgress = 0
+      this.levelUpQuota = 2
+      this.difficulty = 5
 
-        this.secondsPerProblem = 60
-        this.secondsLeft = 60
-        this.paused = false,
-        this.countdownIntervalID = null
-    
-        this.loadNewProblem()
-        this.tries = 1,
+      this.secondsPerProblem = 30
+      this.secondsLeft = 30
+      this.paused = false,
+      this.countdownIntervalID = null
 
-        this.roundStats = []
+      this.loadNewProblem()
+      this.tries = 1,
+
+      this.roundStats = []
+      this.gameStats.averageAttemptCount = 0
+      this.gameStats.averageErrorPercent = 0
+      this.gameStats.problemsSolvedCount = 0
     },
     showStats: function () {
       this.paused = true
@@ -475,6 +482,10 @@ const toMetric = new Vue({
     this.roundStatsModal.options.onCloseEnd = () => {
       this.onLevelUp()
       this.paused = false
+    }
+
+    this.gameOverModal.options.onCloseStart = () => {
+      this.resetGame()
     }
 
     MathJax.Hub.Register.StartupHook('End', () => {
