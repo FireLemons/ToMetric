@@ -240,6 +240,27 @@ svg.ruler rect.halfHatch{
     padding: .5em 0;
 }
 
+#game-over h4 {
+    border-bottom: 2px solid white;
+    padding-bottom: 4px;
+}
+
+#game-over table td{
+    font-size: 14pt;
+}
+
+#game-over table td:first-child {
+    border-right: 2px solid white;
+}
+
+#game-over table td:last-child {
+    padding-left: 1em;
+}
+
+#game-over table tr{
+    border-bottom: 0;
+}
+
 #load-content{
     margin-top: 40vh
 }
