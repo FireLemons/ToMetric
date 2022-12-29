@@ -333,7 +333,7 @@ const toMetric = new Vue({
 
     roundStats: [],
     gameStats: {
-      averageAttemptCount: 0,
+      attemptCount: 0,
       averageErrorPercent: 0,
       problemsSolvedCount: 0,
     }
@@ -412,11 +412,11 @@ const toMetric = new Vue({
       }
 
       this.roundStats.push(problemStats)
-      this.gameStats.averageAttemptCount = cumulativeAverage(problemStats.tries, this.gameStats.averageAttemptCount, this.gameStats.problemsSolvedCount)
-      this.gameStats.averageErrorPercent = cumulativeAverage(problemStats.errorPercent === '< 1' ? 0 : problemStats.errorPercent, this.gameStats.averageErrorPercent, this.gameStats.problemsSolvedCount)
-      this.gameStats.problemsSolvedCount++
+      this.gameStats.attemptCount += problemStats.tries
 
-      console.log(cumulativeAverage(problemStats.tries, this.gameStats.averageAttemptCount, this.gameStats.problemsSolvedCount))
+      let errorPercentAsNumber = problemStats.errorPercent === '< 1' ? 0 : Number(problemStats.errorPercent)
+      this.gameStats.averageErrorPercent = cumulativeAverage(errorPercentAsNumber, this.gameStats.averageErrorPercent, this.gameStats.problemsSolvedCount)
+      this.gameStats.problemsSolvedCount++
     },
     onLevelUp: function () {
       this.level++
@@ -451,7 +451,7 @@ const toMetric = new Vue({
       this.tries = 1,
 
       this.roundStats = []
-      this.gameStats.averageAttemptCount = 0
+      this.gameStats.attemptCount = 0
       this.gameStats.averageErrorPercent = 0
       this.gameStats.problemsSolvedCount = 0
     },
