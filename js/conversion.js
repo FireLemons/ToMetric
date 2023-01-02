@@ -55,29 +55,9 @@ function fixRepeat (x) {
 
   if (matchRepeat) {
     const xTruncated = matchRepeat[1]
+    const repeatingDigitAsString = matchRepeat[2].charAt(1)
 
-    switch (matchRepeat[2].charAt(1)) {
-      case '1':
-        return xTruncated + '11...'
-      case '2':
-        return xTruncated + '22...'
-      case '3':
-        return xTruncated + '33...'
-      case '4':
-        return xTruncated + '44...'
-      case '5':
-        return xTruncated + '55...'
-      case '6':
-        return xTruncated + '66...'
-      case '7':
-        return xTruncated + '77...'
-      case '8':
-        return xTruncated + '88...'
-      case '0':
-        return xTruncated + '00...'
-      case '9':
-        return xTruncated + '99...'
-    }
+    return `${xTruncated}${repeatingDigitAsString}${repeatingDigitAsString}...`
   } else {
     return x
   }
