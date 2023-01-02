@@ -58,40 +58,25 @@ function fixRepeat (x) {
 
     switch (matchRepeat[2].charAt(1)) {
       case '1':
-        return xTruncated + '11'
+        return xTruncated + '11...'
       case '2':
-        return xTruncated + '22'
+        return xTruncated + '22...'
       case '3':
-        return xTruncated + '33'
+        return xTruncated + '33...'
       case '4':
-        return xTruncated + '44'
+        return xTruncated + '44...'
       case '5':
-        return xTruncated + '55'
+        return xTruncated + '55...'
       case '6':
-        return xTruncated + '67'
+        return xTruncated + '66...'
       case '7':
-        return xTruncated + '78'
+        return xTruncated + '77...'
       case '8':
-        return xTruncated + '89'
+        return xTruncated + '88...'
       case '0':
-        return xTruncated.charAt(xTruncated.length - 1) === '.' ? xTruncated.substring(0, xTruncated.length - 1) : xTruncated
+        return xTruncated + '00...'
       case '9':
-        const precisionMatch = xTruncated.match(/[0-9]+\.([0-9]*)/)
-        const x2 = parseFloat(xTruncated) + Math.pow(10, -1 * precisionMatch[1].length)
-
-        if (x2.toString().match(repeatPattern)) {
-          let offsetPlaceValue = 0
-          let x3
-
-          do {
-            x3 = fixRepeat(parseFloat(xTruncated) + Math.pow(10, -1 * (precisionMatch[1].length + 4 + offsetPlaceValue)))
-            offsetPlaceValue++
-          } while (x3.toString().match(repeatPattern))
-
-          return x3
-        }
-
-        return x2
+        return xTruncated + '99...'
     }
   } else {
     return x
