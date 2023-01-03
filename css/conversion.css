@@ -161,10 +161,18 @@ svg.ruler rect.halfHatch{
 }
 
 #countdownBar div{
-    background-color: white;
-    height: 64px; width: calc(100% - 2em);
+    height: 64px;
     position: absolute;
     z-index: 1;
+}
+
+#countdownBar #timeLeft{
+    background-color: white;
+    width: calc(100% - 2em);
+}
+
+#countdownBar #timeRemoved{
+    background-color: #b71c1c;
 }
 
 #countdownBar svg{

@@ -105,7 +105,9 @@
                           </div>
                       </div>
                       <div id="countdownBar">
-                          <div v-bind:style="{width: 'calc(' + secondsLeft * 100 / secondsPerProblem + '% - 2em)'}"></div>
+                          <div id="timeLeft" v-bind:style="{width: 'calc(' + secondsLeft * 100 / MAX_SECONDS + '% - 2em)'}"></div>
+                          <div id="timeRemoved"
+                            :style="{ left: 'calc(' + secondsPerProblem * 100 / MAX_SECONDS + '% - 1em)', width: (100 - (secondsPerProblem * 100 / MAX_SECONDS)) + '%'}"></div>
                           <svg xmlns="http://www.w3.org/2000/svg">
                               <path d="m4 0h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h4v-64h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v48h4v-48h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v32h4v-32h4v64h-1276z"/>
                           </svg>
@@ -195,6 +197,12 @@
                   <td > Level Duration Increases </td>
                   <td>
                     {{ levelUpQuota - 2 }}
+                  </td>
+                </tr>
+                <tr>
+                  <td > Time Decreases </td>
+                  <td>
+                    {{ MAX_SECONDS - secondsPerProblem }}
                   </td>
                 </tr>
               </tbody>

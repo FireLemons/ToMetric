@@ -1,3 +1,5 @@
+const MAX_SECONDS_PER_PROBLEM = 30
+
 // Generates a TeX representation of a formula
 //   @param  {number}  ratio The ratio for unit conversion
 //   @param  {string}  imperial The abbreviation for the imperial unit of the conversion
@@ -279,8 +281,9 @@ const toMetric = new Vue({
     levelUpQuota: 2,
     difficulty: 5,
 
-    secondsPerProblem: 30,
-    secondsLeft: 30,
+    MAX_SECONDS: MAX_SECONDS_PER_PROBLEM,
+    secondsPerProblem: MAX_SECONDS_PER_PROBLEM,
+    secondsLeft: MAX_SECONDS_PER_PROBLEM,
     paused: false,
     countdownIntervalID: null,
 
@@ -387,10 +390,13 @@ const toMetric = new Vue({
       this.level++
       const roll = Math.random()
 
-      if (roll < 0.5) {
+      if (roll < 0.375) {
         this.difficulty += 5
-      } else {
+      } else if (roll < 0.75) {
         this.levelUpQuota += 1
+      } else {
+        this.secondsPerProblem--
+        this.secondsLeft = this.secondsPerProblem
       }
 
       this.loadNewProblem()
@@ -407,8 +413,8 @@ const toMetric = new Vue({
       this.levelUpQuota = 2
       this.difficulty = 5
 
-      this.secondsPerProblem = 30
-      this.secondsLeft = 30
+      this.secondsPerProblem = MAX_SECONDS_PER_PROBLEM
+      this.secondsLeft = MAX_SECONDS_PER_PROBLEM
       this.paused = false,
       this.countdownIntervalID = null
 
