@@ -390,7 +390,7 @@ const toMetric = new Vue({
       this.level++
       const roll = Math.random()
 
-      if (roll < 0.375) {
+      if (roll < 0.5) {
         this.difficulty += 5
       } else if (roll < 0.75) {
         this.levelUpQuota += 1
